@@ -1,0 +1,8 @@
+---
+title: "index"
+author: "Jean-Baka Domelevo Entfellner"
+date: '2022-07-01'
+output: html_document
+---
+
+This is the index of our small RMarkdown website for this R tutorial 

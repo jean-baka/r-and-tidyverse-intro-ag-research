@@ -1,0 +1,10 @@
+name: "r-tutorial-website"
+navbar:
+  title: "Learning R, RStudio and the tidyverse environment from scratch for agricultural research"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Installing R and RStudio"
+      href: installing-familiarizing.html
+    - text: "First interactions with base R"
+      href: intro-base-R.html
