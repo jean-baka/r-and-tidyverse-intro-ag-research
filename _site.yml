@@ -1,4 +1,5 @@
 name: "r-tutorial-website"
+output_dir: "docs"
 navbar:
   title: "Learning R, RStudio and the tidyverse environment from scratch for agricultural research"
   left:
