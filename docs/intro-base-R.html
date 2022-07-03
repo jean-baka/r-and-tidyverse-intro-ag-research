@@ -256,6 +256,9 @@ $(document).ready(function () {
 <li>
   <a href="intro-base-R.html">First interactions with base R</a>
 </li>
+<li>
+  <a href="playing-tidyverse.html">Exploring a dataset with tidyverse</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -386,7 +389,7 @@ or “environment”: it returns a vector populated with strings giving the
 names of these objects present in your current R environment (i.e. the
 variables you defined earlier in your interactive session).</p>
 <pre class="r"><code>&gt; ls()</code></pre>
-<pre><code>[1] &quot;a&quot;     &quot;b&quot;     &quot;myvec&quot;</code></pre>
+<pre><code>[1] &quot;a&quot;          &quot;b&quot;          &quot;households&quot; &quot;myvec&quot;      &quot;vec&quot;       </code></pre>
 <p>Beware!! If you omit the parentheses, R will try and evaluate
 <strong>the function itself</strong>:</p>
 <pre class="r"><code>&gt; ls</code></pre>
@@ -421,7 +424,7 @@ variables you defined earlier in your interactive session).</p>
     }
     else all.names
 }
-&lt;bytecode: 0x563cf5ca7068&gt;
+&lt;bytecode: 0x559a98c8a4f8&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div id="getting-some-help" class="section level2">
@@ -737,54 +740,42 @@ repeated patterns of five nucleotides (A, C, A, T, G): there will be
 twice as many A’s as any of the other three nucleotides.</p>
 <pre class="r"><code>&gt; mat5=matrix(c(&#39;A&#39;,&#39;C&#39;,&#39;A&#39;,&#39;T&#39;,&#39;G&#39;),nrow=10,ncol=42,byrow=T)
 &gt; mat5[1,] # just to check the first line...</code></pre>
-<pre><code> [1] &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot;
-[20] &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot;
-[39] &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot;</code></pre>
+<pre><code> [1] &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot;
+[22] &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot;</code></pre>
 <pre class="r"><code>&gt; mat5 == &quot;G&quot;  # vectorized comparison to &quot;G&quot;</code></pre>
-<pre><code>       [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]  [,9] [,10] [,11] [,12]
- [1,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
- [2,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
- [3,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
- [4,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
- [5,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
- [6,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
- [7,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
- [8,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
- [9,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
-[10,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
-      [,13] [,14] [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23] [,24]
- [1,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
- [2,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
- [3,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
- [4,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
- [5,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
- [6,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
- [7,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
- [8,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
- [9,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
-[10,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
-      [,25] [,26] [,27] [,28] [,29] [,30] [,31] [,32] [,33] [,34] [,35] [,36]
- [1,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
- [2,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
- [3,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
- [4,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
- [5,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
- [6,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
- [7,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
- [8,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
- [9,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
-[10,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
-      [,37] [,38] [,39] [,40] [,41] [,42]
- [1,] FALSE FALSE FALSE  TRUE FALSE FALSE
- [2,] FALSE  TRUE FALSE FALSE FALSE FALSE
- [3,] FALSE FALSE FALSE FALSE  TRUE FALSE
- [4,] FALSE FALSE  TRUE FALSE FALSE FALSE
- [5,]  TRUE FALSE FALSE FALSE FALSE  TRUE
- [6,] FALSE FALSE FALSE  TRUE FALSE FALSE
- [7,] FALSE  TRUE FALSE FALSE FALSE FALSE
- [8,] FALSE FALSE FALSE FALSE  TRUE FALSE
- [9,] FALSE FALSE  TRUE FALSE FALSE FALSE
-[10,]  TRUE FALSE FALSE FALSE FALSE  TRUE</code></pre>
+<pre><code>       [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]  [,9] [,10] [,11] [,12] [,13] [,14]
+ [1,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+ [2,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
+ [3,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+ [4,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
+ [5,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+ [6,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+ [7,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
+ [8,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+ [9,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
+[10,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+      [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23] [,24] [,25] [,26] [,27] [,28]
+ [1,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+ [2,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
+ [3,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+ [4,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+ [5,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
+ [6,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+ [7,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
+ [8,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+ [9,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+[10,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
+      [,29] [,30] [,31] [,32] [,33] [,34] [,35] [,36] [,37] [,38] [,39] [,40] [,41] [,42]
+ [1,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+ [2,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+ [3,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
+ [4,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+ [5,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
+ [6,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+ [7,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+ [8,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
+ [9,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+[10,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE</code></pre>
 <pre class="r"><code>&gt; length(mat5[mat5==&quot;G&quot;])</code></pre>
 <pre><code>[1] 84</code></pre>
 <p>Note that the two boolean/logical values <code>TRUE</code> and
@@ -932,48 +923,39 @@ set of data is <code>summary</code>, which gives an account of the
 distribution of categorical variables as well as a basic statistical
 summary of all numerical variables:</p>
 <pre class="r"><code>&gt; summary(iris)</code></pre>
-<pre><code>  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
- Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
- 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
- Median :5.800   Median :3.000   Median :4.350   Median :1.300  
- Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
- 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
- Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
-       Species  
- setosa    :50  
- versicolor:50  
- virginica :50  
-                
-                
-                </code></pre>
+<pre><code>  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width          Species  
+ Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100   setosa    :50  
+ 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300   versicolor:50  
+ Median :5.800   Median :3.000   Median :4.350   Median :1.300   virginica :50  
+ Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199                  
+ 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800                  
+ Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500                  </code></pre>
 <div id="taking-subsets-out-of-a-data-frame" class="section level3">
 <h3>Taking subsets out of a data frame</h3>
 <p>As we have already seen, the dollar sign is used to designate a field
 from a data frame:</p>
 <pre class="r"><code>&gt; iris$Sepal.Length</code></pre>
-<pre><code>  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4 5.1
- [19] 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4 5.2 5.5 4.9 5.0
- [37] 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6 5.3 5.0 7.0 6.4 6.9 5.5
- [55] 6.5 5.7 6.3 4.9 6.6 5.2 5.0 5.9 6.0 6.1 5.6 6.7 5.6 5.8 6.2 5.6 5.9 6.1
- [73] 6.3 6.1 6.4 6.6 6.8 6.7 6.0 5.7 5.5 5.5 5.8 6.0 5.4 6.0 6.7 6.3 5.6 5.5
- [91] 5.5 6.1 5.8 5.0 5.6 5.7 5.7 6.2 5.1 5.7 6.3 5.8 7.1 6.3 6.5 7.6 4.9 7.3
-[109] 6.7 7.2 6.5 6.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7 6.0 6.9 5.6 7.7 6.3 6.7 7.2
-[127] 6.2 6.1 6.4 7.2 7.4 7.9 6.4 6.3 6.1 7.7 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8
-[145] 6.7 6.7 6.3 6.5 6.2 5.9</code></pre>
+<pre><code>  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4 5.1 5.7 5.1 5.4
+ [22] 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4 5.2 5.5 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5
+ [43] 4.4 5.0 5.1 4.8 5.1 4.6 5.3 5.0 7.0 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2 5.0 5.9 6.0
+ [64] 6.1 5.6 6.7 5.6 5.8 6.2 5.6 5.9 6.1 6.3 6.1 6.4 6.6 6.8 6.7 6.0 5.7 5.5 5.5 5.8 6.0
+ [85] 5.4 6.0 6.7 6.3 5.6 5.5 5.5 6.1 5.8 5.0 5.6 5.7 5.7 6.2 5.1 5.7 6.3 5.8 7.1 6.3 6.5
+[106] 7.6 4.9 7.3 6.7 7.2 6.5 6.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7 6.0 6.9 5.6 7.7 6.3 6.7 7.2
+[127] 6.2 6.1 6.4 7.2 7.4 7.9 6.4 6.3 6.1 7.7 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8 6.7 6.7 6.3
+[148] 6.5 6.2 5.9</code></pre>
 <p>Note that we could also use the good old square bracket notation to
 select that column: a data frame resembles a matrix where column are not
 designated with their indices, but with names (strings of
 characters):</p>
 <pre class="r"><code>&gt; iris[,&#39;Sepal.Length&#39;]</code></pre>
-<pre><code>  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4 5.1
- [19] 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4 5.2 5.5 4.9 5.0
- [37] 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6 5.3 5.0 7.0 6.4 6.9 5.5
- [55] 6.5 5.7 6.3 4.9 6.6 5.2 5.0 5.9 6.0 6.1 5.6 6.7 5.6 5.8 6.2 5.6 5.9 6.1
- [73] 6.3 6.1 6.4 6.6 6.8 6.7 6.0 5.7 5.5 5.5 5.8 6.0 5.4 6.0 6.7 6.3 5.6 5.5
- [91] 5.5 6.1 5.8 5.0 5.6 5.7 5.7 6.2 5.1 5.7 6.3 5.8 7.1 6.3 6.5 7.6 4.9 7.3
-[109] 6.7 7.2 6.5 6.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7 6.0 6.9 5.6 7.7 6.3 6.7 7.2
-[127] 6.2 6.1 6.4 7.2 7.4 7.9 6.4 6.3 6.1 7.7 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8
-[145] 6.7 6.7 6.3 6.5 6.2 5.9</code></pre>
+<pre><code>  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4 5.1 5.7 5.1 5.4
+ [22] 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4 5.2 5.5 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5
+ [43] 4.4 5.0 5.1 4.8 5.1 4.6 5.3 5.0 7.0 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2 5.0 5.9 6.0
+ [64] 6.1 5.6 6.7 5.6 5.8 6.2 5.6 5.9 6.1 6.3 6.1 6.4 6.6 6.8 6.7 6.0 5.7 5.5 5.5 5.8 6.0
+ [85] 5.4 6.0 6.7 6.3 5.6 5.5 5.5 6.1 5.8 5.0 5.6 5.7 5.7 6.2 5.1 5.7 6.3 5.8 7.1 6.3 6.5
+[106] 7.6 4.9 7.3 6.7 7.2 6.5 6.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7 6.0 6.9 5.6 7.7 6.3 6.7 7.2
+[127] 6.2 6.1 6.4 7.2 7.4 7.9 6.4 6.3 6.1 7.7 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8 6.7 6.7 6.3
+[148] 6.5 6.2 5.9</code></pre>
 <p>Selecting a range of lines works, as the lines (or records) in a data
 frame are numbered:</p>
 <pre class="r"><code>&gt; iris[50:54,]</code></pre>
@@ -1094,7 +1076,7 @@ frame:</p>
 &gt; cbind(my_column, iris) -&gt; iris2
 &gt; str(iris2)</code></pre>
 <pre><code>&#39;data.frame&#39;:   150 obs. of  6 variables:
- $ my_column   : num  97594 49447 85343 76222 46660 ...
+ $ my_column   : num  45398 81456 16181 43597 44161 ...
  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
@@ -1115,18 +1097,18 @@ dataframe made of numeric values:</p>
 &gt; av6=names(which.max(table(iris2[,6]))) # # to get the most common category in this factor
 &gt; rbind(iris2,c(av1,av2,av3,av4,av5,av6)) -&gt; iris3
 &gt; tail(iris3, n=2)</code></pre>
-<pre><code>                  ID     Sepal.Length      Sepal.Width Petal.Length
-150             9213              5.9                3          5.1
-151 53367.5266666667 5.84333333333333 3.05733333333333        3.758
-         Petal.Width   Species
-150              1.8 virginica
-151 1.19933333333333    setosa</code></pre>
+<pre><code>                  ID     Sepal.Length      Sepal.Width Petal.Length      Petal.Width
+150            65928              5.9                3          5.1              1.8
+151 53944.2333333333 5.84333333333333 3.05733333333333        3.758 1.19933333333333
+      Species
+150 virginica
+151    setosa</code></pre>
 <p>So it seems that we are fine: the line containing the average values
 of all the columns has been added at the bottom of the dataframe. But
 let’s look at the structure of our new <code>iris3</code> variable:</p>
 <pre class="r"><code>&gt; str(iris3)</code></pre>
 <pre><code>&#39;data.frame&#39;:   151 obs. of  6 variables:
- $ ID          : chr  &quot;97594&quot; &quot;49447&quot; &quot;85343&quot; &quot;76222&quot; ...
+ $ ID          : chr  &quot;45398&quot; &quot;81456&quot; &quot;16181&quot; &quot;43597&quot; ...
  $ Sepal.Length: chr  &quot;5.1&quot; &quot;4.9&quot; &quot;4.7&quot; &quot;4.6&quot; ...
  $ Sepal.Width : chr  &quot;3.5&quot; &quot;3&quot; &quot;3.2&quot; &quot;3.1&quot; ...
  $ Petal.Length: chr  &quot;1.4&quot; &quot;1.4&quot; &quot;1.3&quot; &quot;1.5&quot; ...
@@ -1148,10 +1130,10 @@ lots of basic objects accept conversion to strings by means of the
 <pre class="r"><code>&gt; mode(av6)</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>
 <pre class="r"><code>&gt; av1</code></pre>
-<pre><code>[1] 53367.53</code></pre>
+<pre><code>[1] 53944.23</code></pre>
 <pre class="r"><code>&gt; c(av1,av2,av3,av4,av5,av6) -&gt; last_row
 &gt; last_row</code></pre>
-<pre><code>[1] &quot;53367.5266666667&quot; &quot;5.84333333333333&quot; &quot;3.05733333333333&quot; &quot;3.758&quot;           
+<pre><code>[1] &quot;53944.2333333333&quot; &quot;5.84333333333333&quot; &quot;3.05733333333333&quot; &quot;3.758&quot;           
 [5] &quot;1.19933333333333&quot; &quot;setosa&quot;          </code></pre>
 <pre class="r"><code>&gt; mode(last_row)</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>

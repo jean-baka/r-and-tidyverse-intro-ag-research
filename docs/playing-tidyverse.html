@@ -256,6 +256,9 @@ $(document).ready(function () {
 <li>
   <a href="intro-base-R.html">First interactions with base R</a>
 </li>
+<li>
+  <a href="playing-tidyverse.html">Exploring a dataset with tidyverse</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
@@ -368,7 +371,22 @@ hand side.</p>
 second sheet. We write a call to the <code>read_xlsx()</code> function
 from the <code>readxl</code> package:</p>
 <pre class="r"><code>&gt; read_xlsx(&quot;Sample data1.xlsx&quot;, sheet = 2) # fails because readxl is actually not loaded by default when one loads tidyverse, so we go:</code></pre>
-<pre><code>Error in read_xlsx(&quot;Sample data1.xlsx&quot;, sheet = 2): could not find function &quot;read_xlsx&quot;</code></pre>
+<pre><code># A tibble: 527 × 16
+   qno   survey  anydairy any_agric   sex   age education hh_experience primary_activity 
+   &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;            
+ 1 BUN01 Western        0         1     1    48        12             5 Businessman      
+ 2 BUN02 Western        0         1     1    28         8             8 Farm management  
+ 3 BUN03 Western        1         1     1    72         4            42 &lt;NA&gt;             
+ 4 BUN04 Western        0         1     0    52         0            19 Farm management  
+ 5 BUN05 Western        1         1     1    48        12            14 Farm management  
+ 6 BUN06 Western        0         1     1    70         4            35 Farm management  
+ 7 BUN07 Western        0         1     1    32        12             4 Labourer off farm
+ 8 BUN08 Western        1         1     1    38        12            11 Civil servant    
+ 9 BUN09 Western        0         1     1    35        10            10 Farm management  
+10 BUN10 Western        0         1     1    40        12            14 Farm management  
+# … with 517 more rows, and 7 more variables: adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;,
+#   depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;, offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;,
+#   off_farm_percent &lt;dbl&gt;</code></pre>
 <pre class="r"><code>&gt; library(readxl)
 &gt; read_xlsx(&quot;Sample data1.xlsx&quot;, sheet = 2) -&gt; households
 &gt; str(households)</code></pre>
