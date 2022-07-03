@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Jean-Baka Domelevo Entfellner" />
+
+<meta name="date" content="2022-07-03" />
+
+<title>First steps with the tidyverse collection</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Learning R, RStudio and the tidyverse environment from scratch for agricultural research</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="installing-familiarizing.html">Installing R and RStudio</a>
+</li>
+<li>
+  <a href="intro-base-R.html">First interactions with base R</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">First steps with the tidyverse
+collection</h1>
+<h4 class="author">Jean-Baka Domelevo Entfellner</h4>
+<h4 class="date">2022-07-03</h4>
+
+</div>
+
+
+<div id="introduction-to-r-packages" class="section level1">
+<h1>Introduction to R packages</h1>
+<p>In R, <strong>packages</strong> are software modules providing extra
+functions, operators and datasets. Some packages, like <code>base</code>
+and <code>stats</code>, are part of the core R distribution, which means
+you don’t need to install them separately, and they are already loaded
+in your environment upon starting your R session. When using RStudio, in
+the bottom right pane, you can see the available packages by clicking
+the <code>Packages</code> tab. The ones that are currently loaded in
+your environment appear with a tick mark. For those, you don’t need to
+prepend the package name followed by a double colon when you call a
+function it implements (e.g. you can write <code>str_sub()</code>
+instead of <code>stringr::str_sub()</code> if and only if the
+<code>stringr</code> package is already loaded in your environment).</p>
+<p>In order to load a package, one calls <code>library()</code> with the
+package name as argument. Quoting is unnecessary.</p>
+<p>Before using a package for the first time, you need to download and
+install it on your computer by calling <code>install.packages()</code>
+with the quoted name of the package as argument.</p>
+</div>
+<div id="introduction-to-the-tidyverse-collection"
+class="section level1">
+<h1>Introduction to the tidyverse collection</h1>
+<p><a href="https://www.tidyverse.org/">tidyverse</a> is a collection of
+open-source packages for R that were primarily developed by Hadley
+Wickham. Let us list the most common and broadly describe their
+scope:</p>
+<ol style="list-style-type: decimal">
+<li><code>tibble</code> to work with <em>tibbles</em> instead of data
+frames: tibbles are “smart” data containers that display in a smarter
+way, with neater type control, etc.</li>
+<li><code>readr</code> to import tabular data from different text files
+(tab-delimited, csv, fixed-width fields, etc) into tibbles</li>
+<li><code>readxl</code> to import data from Excel files (both .xls and
+.xlsx) into tibbles</li>
+<li><code>tidyr</code> to transform data with different degrees of
+“messiness” into <strong>tidy data</strong>. Tidy data is simple to
+understand, but many datasets you come across are not “tidy”. In tidy
+data, each variable is in its own column, and each observation (a.k.a
+“case” or “individual”) is in its own row. <code>tidyr</code> helps you
+achieve tidy data and reshape datasets by collapsing or splitting
+columns, creating combinations of cases, handling missing values,
+etc</li>
+<li><code>magrittr</code> introduces additional pipe operators like
+<code>%&gt;%</code> and <code>%&lt;&gt;%</code></li>
+<li><code>dplyr</code> is for me <strong>the central package</strong> of
+the tidyverse collection. It’s more than a pair of data pliers: it is a
+whole toolbox to extract information from a dataset, to group,
+summarize, join, apply functions to several variables, etc.</li>
+<li><code>ggplot2</code> implements a whole “grammar of graphics” and
+enables the user to create beautiful graphs of various types
+(scatterplots, histograms, jitter plots, violin plots, scatterplots,
+bargraphs, smoothed curves, 2D-density plots, etc), tweaking the way
+they are displayed through simple commands while maintaining a sense of
+graphical harmony.</li>
+<li><code>stringr</code> enables you to manipulate strings efficiently
+and effortlessly.</li>
+<li><code>purrr</code> is more advanced and deals with functional
+programming : programming by manipulating functions as objects</li>
+<li><code>forcats</code> is a re-implementation of R’s classical factors
+(containers for categorical data).</li>
+</ol>
+<p>All these packages constitute a huge programming effort and a
+considerable contribution to the R ecosystem. I name them a “R 2.0”. In
+order to install all of them at once, one goes:</p>
+<pre class="r"><code>&gt; install.packages(&quot;tidyverse&quot;)</code></pre>
+<p>The above can take a little bit of time. Then we go:</p>
+<pre class="r"><code>&gt; library(tidyverse) # you could also load only the packages you want to use among those listed above, issuing one or several calls to library()</code></pre>
+<p>This opens up a whole world of possibilities, that we are going to
+explore in the remaining sections of this tutorial.</p>
+</div>
+<div id="the-pipe-operator" class="section level1">
+<h1>The pipe operator</h1>
+<pre class="r"><code>&gt; sum(3,7,2) # sum() accepts an arbitrary number of arguments and yields their sum</code></pre>
+<pre><code>[1] 12</code></pre>
+<pre class="r"><code>&gt; # can be written:
+&gt; 3 %&gt;% sum(7,2)</code></pre>
+<pre><code>[1] 12</code></pre>
+<p>The pipe operator <code>%&gt;%</code> passes what is present on his
+left hand side as the first argument of the function call on its right
+hand side.</p>
+<pre class="r"><code>&gt; vec &lt;- c(3,5,NA,7)
+&gt; vec %&gt;% sum(na.rm = TRUE) # same as sum(vec, na.rm = TRUE)</code></pre>
+<pre><code>[1] 15</code></pre>
+</div>
+<div id="reading-from-files-with-readxl" class="section level1">
+<h1>Reading from files with readxl</h1>
+<p>We will import into an R object the content of the sheet called
+“HHcharacteristic” in the file called “Sample data1.xlsx”. That is its
+second sheet. We write a call to the <code>read_xlsx()</code> function
+from the <code>readxl</code> package:</p>
+<pre class="r"><code>&gt; read_xlsx(&quot;Sample data1.xlsx&quot;, sheet = 2) # fails because readxl is actually not loaded by default when one loads tidyverse, so we go:</code></pre>
+<pre><code>Error in read_xlsx(&quot;Sample data1.xlsx&quot;, sheet = 2): could not find function &quot;read_xlsx&quot;</code></pre>
+<pre class="r"><code>&gt; library(readxl)
+&gt; read_xlsx(&quot;Sample data1.xlsx&quot;, sheet = 2) -&gt; households
+&gt; str(households)</code></pre>
+<pre><code>tibble [527 × 16] (S3: tbl_df/tbl/data.frame)
+ $ qno             : chr [1:527] &quot;BUN01&quot; &quot;BUN02&quot; &quot;BUN03&quot; &quot;BUN04&quot; ...
+ $ survey          : chr [1:527] &quot;Western&quot; &quot;Western&quot; &quot;Western&quot; &quot;Western&quot; ...
+ $ anydairy        : num [1:527] 0 0 1 0 1 0 0 1 0 0 ...
+ $ any_agric       : num [1:527] 1 1 1 1 1 1 1 1 1 1 ...
+ $ sex             : num [1:527] 1 1 1 0 1 1 1 1 1 1 ...
+ $ age             : num [1:527] 48 28 72 52 48 70 32 38 35 40 ...
+ $ education       : num [1:527] 12 8 4 0 12 4 12 12 10 12 ...
+ $ hh_experience   : num [1:527] 5 8 42 19 14 35 4 11 10 14 ...
+ $ primary_activity: chr [1:527] &quot;Businessman&quot; &quot;Farm management&quot; NA &quot;Farm management&quot; ...
+ $ adults          : num [1:527] 4 2 5 3 2 4 4 6 2 4 ...
+ $ fem_totadult    : num [1:527] 0.75 0.5 0.6 0.667 0.5 ...
+ $ depend_ratio    : num [1:527] 0.429 0.333 0.286 0.5 0.714 ...
+ $ off_farm_act    : num [1:527] 2 2 1 2 1 1 2 2 0 1 ...
+ $ offfarm_activity: num [1:527] 2 2 1 2 1 1 2 2 0 1 ...
+ $ interview_date  : POSIXct[1:527], format: &quot;2000-04-25&quot; &quot;2000-04-25&quot; ...
+ $ off_farm_percent: num [1:527] 0.5 1 0.2 0.667 0.5 ...</code></pre>
+<p>You can see that the data from the excel file has been imported
+correctly into a tibble (first line of the <code>str()</code> report)
+with 527 rows (observations) and 16 columns (variables).</p>
+</div>
+<div id="simple-summaries-the-old-and-new-way" class="section level1">
+<h1>Simple summaries the old and new way</h1>
+<p>There is a column for sex (I guess, males and females). It is encoded
+as numeric and not as a qualitative variables with two values, so the
+summary with summary() is rather awkward:</p>
+<pre class="r"><code>&gt; summary(households$sex)</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.0000  1.0000  1.0000  0.7666  1.0000  1.0000 </code></pre>
+<p>Note that the equivalent to the above but using pipes amounts to:</p>
+<ol style="list-style-type: decimal">
+<li>piping the whole dataset into a function that extracts <em>as a
+vector</em> its <code>sex</code> variable, and then</li>
+<li>piping that vector into the <code>summary()</code> function.</li>
+</ol>
+<p>Which is done as below:</p>
+<pre class="r"><code>&gt; households %&gt;% `$`(sex) %&gt;% summary() # we quote the dollar operator with backticks</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.0000  1.0000  1.0000  0.7666  1.0000  1.0000 </code></pre>
+<pre class="r"><code>&gt; #or
+&gt; households %&gt;% `[[`(&quot;sex&quot;) %&gt;% summary() # a tibble is also a data frame, hence a list of variables (columns), and the double-bracket operator extracts as a vector its named element</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.0000  1.0000  1.0000  0.7666  1.0000  1.0000 </code></pre>
+<p>So, the summary is not very informative. With <code>dplyr</code>, the
+<code>summarize</code> operation (you can also write
+<code>summarise</code>, R accepts British English as well as American
+English) is meant to calculate a summary (single value) from one or
+several variables. What we want here is:</p>
+<ol style="list-style-type: decimal">
+<li>to <em>group</em> the dataset into groups according to the value of
+the “sex” variable</li>
+<li>to display the pairs (value, count of observations) for each of the
+different encodings for the “sex” variable.</li>
+</ol>
+<pre class="r"><code>&gt; households %&gt;% group_by(sex) %&gt;% summarize(count = n())</code></pre>
+<pre><code># A tibble: 2 × 2
+    sex count
+  &lt;dbl&gt; &lt;int&gt;
+1     0   123
+2     1   404</code></pre>
+<p>See the excellent <a
+href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf">“Data
+transformation with dplyr” cheatsheet</a>. That explains the above,
+which is what I was used to doing until now, but the recent versions of
+dplyr brought something simpler:</p>
+<pre class="r"><code>&gt; households %&gt;% count(sex)</code></pre>
+<pre><code># A tibble: 2 × 2
+    sex     n
+  &lt;dbl&gt; &lt;int&gt;
+1     0   123
+2     1   404</code></pre>
+<p>To get such a neat table was possible in “the old R”, of course:</p>
+<pre class="r"><code>&gt; summary(as.factor(households$sex)) # transforming into qualitative data so that the summary() yields counts instead of the usual descriptive stats summary with quartiles</code></pre>
+<pre><code>  0   1 
+123 404 </code></pre>
+<p>Alternatively:</p>
+<pre class="r"><code>&gt; table(households$sex)</code></pre>
+<pre><code>
+  0   1 
+123 404 </code></pre>
+<p>But you notice that in both the last two cases (with “the old R”),
+the result appears as a named vector, which is less tidy to work with
+than a true tibble.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -9,3 +9,5 @@ navbar:
       href: installing-familiarizing.html
     - text: "First interactions with base R"
       href: intro-base-R.html
+    - text: "Exploring a dataset with tidyverse"
+      href: playing-tidyverse.html

@@ -65,21 +65,23 @@ ls
 
 ## Getting some help
 
-To get some help on a command, just type a question mark (`?`) immediately followed by the name of the command. You will then enter a manpage-like environment, in which the (Space) key goes to the next screen (or page), the **b** key goes back one page, and a keypress on **q** quits the help and brings you back to the commandline and its invite. Alternatively, depending on the configuration of your computer, you may get access to the HTML version of the help pages:
+To get some help on a command, just type a question mark (`?`) immediately followed by the name of the command. If using the commandline R, you will then enter a manpage-like environment, in which the `space` moves you to the next screen (or page), the `b` key goes back one page, and a keypress on `q` quits the help and brings you back to the commandline and its invite. Alternatively, depending on the configuration of your computer, you may get access to the HTML version of the help pages: that will be the case for most of us, using RStudio: the manpage is displayed in a nice, html format in the bottom right pane. By the way, in RStudio, you can also ask for manpages by clicking on the `Help` tab in the bottom right pane, and then using the search box in the upper right corner of that pane to enter a search keyword. You don't need to type the question marks when using that searchbox.
+
 ```{r}
 ?ls
-#.... consulting the help on the ls command. Press q to quit ....
+#.... viewing the help on the ls command in the help pane
 
 ?length
- # .... consulting the help on the length command. Press q to quit ....
+# .... viewing the help on the length command in the help pane
 
 ??transpose
-#  .... asking for the help pages containing the transpose keyword. Press q to quit ....
+#  .... viewing the help pages containing the transpose keyword in the help pane
 ```
+
 
 The latter type of query (with the double question mark) is to be used when you are unsure of the name of the function you are seeking help about. It tries to provide you with the list of help files containing the keyword in question, after what you will prepend the single question mark to the name of the identified command (or function) to get the relevant help page.
 
-These help pages (also called **manpages**) are all built with the same structure: after a short _Description_ of the purpose of the command, follows a section called _Usage_. This latter section presents the syntax you may use to build a function call, with the possible options to specify and their possible default values. For instance, in the help about the `c` function, the _Usage_ section reads as follows :
+These help pages (also called **manpages**) are all built according to the same structure: after a short _Description_ of the purpose of the command, follows a section called _Usage_. This latter section presents the syntax you may use to build a function call, with the possible options to specify and their possible default values. For instance, in the help about the `c` function, the _Usage_ section reads as follows :
 
 >     c(..., recursive = FALSE)
 
@@ -524,7 +526,7 @@ This dataset comes from a study originally performed by Rosner and colleagues \c
 
 Let us first try and use the simplest form of the function `read.table`:
 ```{r}
-read.table("livestockTLU.csv") -> dat1
+read.table("fev_dataset.txt") -> dat1
 ```
 
 
@@ -550,7 +552,7 @@ str(dat1)
 ```
 
 
-All is fine now, as R correctly detected that the records contain numerical values. If we really want to insist that the `Gender` and `Smoke` variable be treated as categorical, we can force the use of specific classes (or "types") for the different columns (the backslach character at the end of a commandline is just to indicate that the said line continues uninterrupted onto the next: the line break was necessary only to fit the line into this pagewidth):
+All is fine now, as R correctly detected that the records contain numerical values. If we really want to insist that the `Gender` and `Smoke` variable be treated as categorical, we can force the use of specific classes (or "types") for the different columns (the backslash character at the end of a commandline is just to indicate that the said line continues uninterrupted onto the next: the line break was necessary only to fit the line into this pagewidth):
 
 ```{r}
 read.table("fev_dataset.txt", header=TRUE, colClasses=c("integer","numeric","numeric","factor","factor")) -> dat1

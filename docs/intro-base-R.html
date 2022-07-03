@@ -386,11 +386,7 @@ or “environment”: it returns a vector populated with strings giving the
 names of these objects present in your current R environment (i.e. the
 variables you defined earlier in your interactive session).</p>
 <pre class="r"><code>&gt; ls()</code></pre>
-<pre><code> [1] &quot;a&quot;            &quot;av1&quot;          &quot;av2&quot;          &quot;av3&quot;          &quot;av4&quot;          &quot;av5&quot;         
- [7] &quot;av6&quot;          &quot;b&quot;            &quot;blood_groups&quot; &quot;dat1&quot;         &quot;filter&quot;       &quot;iris2&quot;       
-[13] &quot;iris3&quot;        &quot;last_row&quot;     &quot;list1&quot;        &quot;list2&quot;        &quot;mat1&quot;         &quot;mat2&quot;        
-[19] &quot;mat3&quot;         &quot;mat4&quot;         &quot;mat5&quot;         &quot;my_column&quot;    &quot;mydat&quot;        &quot;mydir&quot;       
-[25] &quot;myvec&quot;        &quot;oldnames&quot;     &quot;responses&quot;    &quot;subset1&quot;      &quot;transformed&quot; </code></pre>
+<pre><code>[1] &quot;a&quot;     &quot;b&quot;     &quot;myvec&quot;</code></pre>
 <p>Beware!! If you omit the parentheses, R will try and evaluate
 <strong>the function itself</strong>:</p>
 <pre class="r"><code>&gt; ls</code></pre>
@@ -425,27 +421,33 @@ variables you defined earlier in your interactive session).</p>
     }
     else all.names
 }
-&lt;bytecode: 0x55aa9ecff768&gt;
+&lt;bytecode: 0x563cf5ca7068&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div id="getting-some-help" class="section level2">
 <h2>Getting some help</h2>
 <p>To get some help on a command, just type a question mark
-(<code>?</code>) immediately followed by the name of the command. You
-will then enter a manpage-like environment, in which the (Space) key
-goes to the next screen (or page), the <strong>b</strong> key goes back
-one page, and a keypress on <strong>q</strong> quits the help and brings
-you back to the commandline and its invite. Alternatively, depending on
-the configuration of your computer, you may get access to the HTML
-version of the help pages:</p>
+(<code>?</code>) immediately followed by the name of the command. If
+using the commandline R, you will then enter a manpage-like environment,
+in which the <code>space</code> moves you to the next screen (or page),
+the <code>b</code> key goes back one page, and a keypress on
+<code>q</code> quits the help and brings you back to the commandline and
+its invite. Alternatively, depending on the configuration of your
+computer, you may get access to the HTML version of the help pages: that
+will be the case for most of us, using RStudio: the manpage is displayed
+in a nice, html format in the bottom right pane. By the way, in RStudio,
+you can also ask for manpages by clicking on the <code>Help</code> tab
+in the bottom right pane, and then using the search box in the upper
+right corner of that pane to enter a search keyword. You don’t need to
+type the question marks when using that searchbox.</p>
 <pre class="r"><code>&gt; ?ls
-&gt; #.... consulting the help on the ls command. Press q to quit ....
+&gt; #.... viewing the help on the ls command in the help pane
 &gt; 
 &gt; ?length
-&gt;  # .... consulting the help on the length command. Press q to quit ....
+&gt; # .... viewing the help on the length command in the help pane
 &gt; 
 &gt; ??transpose
-&gt; #  .... asking for the help pages containing the transpose keyword. Press q to quit ....</code></pre>
+&gt; #  .... viewing the help pages containing the transpose keyword in the help pane</code></pre>
 <p>The latter type of query (with the double question mark) is to be
 used when you are unsure of the name of the function you are seeking
 help about. It tries to provide you with the list of help files
@@ -453,12 +455,13 @@ containing the keyword in question, after what you will prepend the
 single question mark to the name of the identified command (or function)
 to get the relevant help page.</p>
 <p>These help pages (also called <strong>manpages</strong>) are all
-built with the same structure: after a short <em>Description</em> of the
-purpose of the command, follows a section called <em>Usage</em>. This
-latter section presents the syntax you may use to build a function call,
-with the possible options to specify and their possible default values.
-For instance, in the help about the <code>c</code> function, the
-<em>Usage</em> section reads as follows :</p>
+built according to the same structure: after a short
+<em>Description</em> of the purpose of the command, follows a section
+called <em>Usage</em>. This latter section presents the syntax you may
+use to build a function call, with the possible options to specify and
+their possible default values. For instance, in the help about the
+<code>c</code> function, the <em>Usage</em> section reads as follows
+:</p>
 <blockquote>
 <pre><code>c(..., recursive = FALSE)</code></pre>
 </blockquote>
@@ -734,32 +737,11 @@ repeated patterns of five nucleotides (A, C, A, T, G): there will be
 twice as many A’s as any of the other three nucleotides.</p>
 <pre class="r"><code>&gt; mat5=matrix(c(&#39;A&#39;,&#39;C&#39;,&#39;A&#39;,&#39;T&#39;,&#39;G&#39;),nrow=10,ncol=42,byrow=T)
 &gt; mat5[1,] # just to check the first line...</code></pre>
-<pre><code> [1] &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot;
-[24] &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot;</code></pre>
+<pre><code> [1] &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot;
+[20] &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot;
+[39] &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot;</code></pre>
 <pre class="r"><code>&gt; mat5 == &quot;G&quot;  # vectorized comparison to &quot;G&quot;</code></pre>
-<pre><code>       [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]  [,9] [,10] [,11] [,12] [,13] [,14] [,15]
- [1,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
- [2,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
- [3,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
- [4,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
- [5,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
- [6,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
- [7,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
- [8,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
- [9,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
-[10,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
-      [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23] [,24] [,25] [,26] [,27] [,28] [,29] [,30]
- [1,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
- [2,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
- [3,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
- [4,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
- [5,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
- [6,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
- [7,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
- [8,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
- [9,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
-[10,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
-      [,31] [,32] [,33] [,34] [,35] [,36] [,37] [,38] [,39] [,40] [,41] [,42]
+<pre><code>       [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]  [,9] [,10] [,11] [,12]
  [1,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
  [2,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
  [3,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
@@ -769,7 +751,40 @@ twice as many A’s as any of the other three nucleotides.</p>
  [7,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
  [8,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
  [9,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
-[10,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE</code></pre>
+[10,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
+      [,13] [,14] [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22] [,23] [,24]
+ [1,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+ [2,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
+ [3,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+ [4,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
+ [5,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+ [6,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+ [7,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
+ [8,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+ [9,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
+[10,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+      [,25] [,26] [,27] [,28] [,29] [,30] [,31] [,32] [,33] [,34] [,35] [,36]
+ [1,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
+ [2,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+ [3,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
+ [4,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+ [5,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+ [6,]  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE
+ [7,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+ [8,] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
+ [9,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+[10,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+      [,37] [,38] [,39] [,40] [,41] [,42]
+ [1,] FALSE FALSE FALSE  TRUE FALSE FALSE
+ [2,] FALSE  TRUE FALSE FALSE FALSE FALSE
+ [3,] FALSE FALSE FALSE FALSE  TRUE FALSE
+ [4,] FALSE FALSE  TRUE FALSE FALSE FALSE
+ [5,]  TRUE FALSE FALSE FALSE FALSE  TRUE
+ [6,] FALSE FALSE FALSE  TRUE FALSE FALSE
+ [7,] FALSE  TRUE FALSE FALSE FALSE FALSE
+ [8,] FALSE FALSE FALSE FALSE  TRUE FALSE
+ [9,] FALSE FALSE  TRUE FALSE FALSE FALSE
+[10,]  TRUE FALSE FALSE FALSE FALSE  TRUE</code></pre>
 <pre class="r"><code>&gt; length(mat5[mat5==&quot;G&quot;])</code></pre>
 <pre><code>[1] 84</code></pre>
 <p>Note that the two boolean/logical values <code>TRUE</code> and
@@ -917,37 +932,48 @@ set of data is <code>summary</code>, which gives an account of the
 distribution of categorical variables as well as a basic statistical
 summary of all numerical variables:</p>
 <pre class="r"><code>&gt; summary(iris)</code></pre>
-<pre><code>  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width          Species  
- Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100   setosa    :50  
- 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300   versicolor:50  
- Median :5.800   Median :3.000   Median :4.350   Median :1.300   virginica :50  
- Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199                  
- 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800                  
- Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500                  </code></pre>
+<pre><code>  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+ Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+ 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+ Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+ Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+ 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+ Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+       Species  
+ setosa    :50  
+ versicolor:50  
+ virginica :50  
+                
+                
+                </code></pre>
 <div id="taking-subsets-out-of-a-data-frame" class="section level3">
 <h3>Taking subsets out of a data frame</h3>
 <p>As we have already seen, the dollar sign is used to designate a field
 from a data frame:</p>
 <pre class="r"><code>&gt; iris$Sepal.Length</code></pre>
-<pre><code>  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4 5.1 5.7 5.1 5.4 5.1
- [23] 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4 5.2 5.5 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0
- [45] 5.1 4.8 5.1 4.6 5.3 5.0 7.0 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2 5.0 5.9 6.0 6.1 5.6 6.7
- [67] 5.6 5.8 6.2 5.6 5.9 6.1 6.3 6.1 6.4 6.6 6.8 6.7 6.0 5.7 5.5 5.5 5.8 6.0 5.4 6.0 6.7 6.3
- [89] 5.6 5.5 5.5 6.1 5.8 5.0 5.6 5.7 5.7 6.2 5.1 5.7 6.3 5.8 7.1 6.3 6.5 7.6 4.9 7.3 6.7 7.2
-[111] 6.5 6.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7 6.0 6.9 5.6 7.7 6.3 6.7 7.2 6.2 6.1 6.4 7.2 7.4 7.9
-[133] 6.4 6.3 6.1 7.7 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8 6.7 6.7 6.3 6.5 6.2 5.9</code></pre>
+<pre><code>  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4 5.1
+ [19] 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4 5.2 5.5 4.9 5.0
+ [37] 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6 5.3 5.0 7.0 6.4 6.9 5.5
+ [55] 6.5 5.7 6.3 4.9 6.6 5.2 5.0 5.9 6.0 6.1 5.6 6.7 5.6 5.8 6.2 5.6 5.9 6.1
+ [73] 6.3 6.1 6.4 6.6 6.8 6.7 6.0 5.7 5.5 5.5 5.8 6.0 5.4 6.0 6.7 6.3 5.6 5.5
+ [91] 5.5 6.1 5.8 5.0 5.6 5.7 5.7 6.2 5.1 5.7 6.3 5.8 7.1 6.3 6.5 7.6 4.9 7.3
+[109] 6.7 7.2 6.5 6.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7 6.0 6.9 5.6 7.7 6.3 6.7 7.2
+[127] 6.2 6.1 6.4 7.2 7.4 7.9 6.4 6.3 6.1 7.7 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8
+[145] 6.7 6.7 6.3 6.5 6.2 5.9</code></pre>
 <p>Note that we could also use the good old square bracket notation to
 select that column: a data frame resembles a matrix where column are not
 designated with their indices, but with names (strings of
 characters):</p>
 <pre class="r"><code>&gt; iris[,&#39;Sepal.Length&#39;]</code></pre>
-<pre><code>  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4 5.1 5.7 5.1 5.4 5.1
- [23] 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4 5.2 5.5 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0
- [45] 5.1 4.8 5.1 4.6 5.3 5.0 7.0 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2 5.0 5.9 6.0 6.1 5.6 6.7
- [67] 5.6 5.8 6.2 5.6 5.9 6.1 6.3 6.1 6.4 6.6 6.8 6.7 6.0 5.7 5.5 5.5 5.8 6.0 5.4 6.0 6.7 6.3
- [89] 5.6 5.5 5.5 6.1 5.8 5.0 5.6 5.7 5.7 6.2 5.1 5.7 6.3 5.8 7.1 6.3 6.5 7.6 4.9 7.3 6.7 7.2
-[111] 6.5 6.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7 6.0 6.9 5.6 7.7 6.3 6.7 7.2 6.2 6.1 6.4 7.2 7.4 7.9
-[133] 6.4 6.3 6.1 7.7 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8 6.7 6.7 6.3 6.5 6.2 5.9</code></pre>
+<pre><code>  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7 5.4 5.1
+ [19] 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4 5.2 5.5 4.9 5.0
+ [37] 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6 5.3 5.0 7.0 6.4 6.9 5.5
+ [55] 6.5 5.7 6.3 4.9 6.6 5.2 5.0 5.9 6.0 6.1 5.6 6.7 5.6 5.8 6.2 5.6 5.9 6.1
+ [73] 6.3 6.1 6.4 6.6 6.8 6.7 6.0 5.7 5.5 5.5 5.8 6.0 5.4 6.0 6.7 6.3 5.6 5.5
+ [91] 5.5 6.1 5.8 5.0 5.6 5.7 5.7 6.2 5.1 5.7 6.3 5.8 7.1 6.3 6.5 7.6 4.9 7.3
+[109] 6.7 7.2 6.5 6.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7 6.0 6.9 5.6 7.7 6.3 6.7 7.2
+[127] 6.2 6.1 6.4 7.2 7.4 7.9 6.4 6.3 6.1 7.7 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8
+[145] 6.7 6.7 6.3 6.5 6.2 5.9</code></pre>
 <p>Selecting a range of lines works, as the lines (or records) in a data
 frame are numbered:</p>
 <pre class="r"><code>&gt; iris[50:54,]</code></pre>
@@ -1068,7 +1094,7 @@ frame:</p>
 &gt; cbind(my_column, iris) -&gt; iris2
 &gt; str(iris2)</code></pre>
 <pre><code>&#39;data.frame&#39;:   150 obs. of  6 variables:
- $ my_column   : num  40677 91064 21029 18904 5836 ...
+ $ my_column   : num  97594 49447 85343 76222 46660 ...
  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
@@ -1089,15 +1115,18 @@ dataframe made of numeric values:</p>
 &gt; av6=names(which.max(table(iris2[,6]))) # # to get the most common category in this factor
 &gt; rbind(iris2,c(av1,av2,av3,av4,av5,av6)) -&gt; iris3
 &gt; tail(iris3, n=2)</code></pre>
-<pre><code>         ID     Sepal.Length      Sepal.Width Petal.Length      Petal.Width   Species
-150   61197              5.9                3          5.1              1.8 virginica
-151 50765.8 5.84333333333333 3.05733333333333        3.758 1.19933333333333    setosa</code></pre>
+<pre><code>                  ID     Sepal.Length      Sepal.Width Petal.Length
+150             9213              5.9                3          5.1
+151 53367.5266666667 5.84333333333333 3.05733333333333        3.758
+         Petal.Width   Species
+150              1.8 virginica
+151 1.19933333333333    setosa</code></pre>
 <p>So it seems that we are fine: the line containing the average values
 of all the columns has been added at the bottom of the dataframe. But
 let’s look at the structure of our new <code>iris3</code> variable:</p>
 <pre class="r"><code>&gt; str(iris3)</code></pre>
 <pre><code>&#39;data.frame&#39;:   151 obs. of  6 variables:
- $ ID          : chr  &quot;40677&quot; &quot;91064&quot; &quot;21029&quot; &quot;18904&quot; ...
+ $ ID          : chr  &quot;97594&quot; &quot;49447&quot; &quot;85343&quot; &quot;76222&quot; ...
  $ Sepal.Length: chr  &quot;5.1&quot; &quot;4.9&quot; &quot;4.7&quot; &quot;4.6&quot; ...
  $ Sepal.Width : chr  &quot;3.5&quot; &quot;3&quot; &quot;3.2&quot; &quot;3.1&quot; ...
  $ Petal.Length: chr  &quot;1.4&quot; &quot;1.4&quot; &quot;1.3&quot; &quot;1.5&quot; ...
@@ -1119,10 +1148,10 @@ lots of basic objects accept conversion to strings by means of the
 <pre class="r"><code>&gt; mode(av6)</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>
 <pre class="r"><code>&gt; av1</code></pre>
-<pre><code>[1] 50765.8</code></pre>
+<pre><code>[1] 53367.53</code></pre>
 <pre class="r"><code>&gt; c(av1,av2,av3,av4,av5,av6) -&gt; last_row
 &gt; last_row</code></pre>
-<pre><code>[1] &quot;50765.8&quot;          &quot;5.84333333333333&quot; &quot;3.05733333333333&quot; &quot;3.758&quot;           
+<pre><code>[1] &quot;53367.5266666667&quot; &quot;5.84333333333333&quot; &quot;3.05733333333333&quot; &quot;3.758&quot;           
 [5] &quot;1.19933333333333&quot; &quot;setosa&quot;          </code></pre>
 <pre class="r"><code>&gt; mode(last_row)</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>
@@ -1207,7 +1236,7 @@ the pulmonary capacity of that same child, hence the presence of these
 variables among the data collected.</p>
 <p>Let us first try and use the simplest form of the function
 <code>read.table</code>:</p>
-<pre class="r"><code>&gt; read.table(&quot;livestockTLU.csv&quot;) -&gt; dat1</code></pre>
+<pre class="r"><code>&gt; read.table(&quot;fev_dataset.txt&quot;) -&gt; dat1</code></pre>
 <p>Okay, we have read the contents of the file and have stored it into a
 new <strong>data frame</strong> we called <code>dat1</code>. As R keeps
 silent after this, let us check that this worked as expected. As two
@@ -1218,16 +1247,20 @@ query):</p>
 <pre class="r"><code>&gt; is.data.frame(dat1)</code></pre>
 <pre><code>[1] TRUE</code></pre>
 <pre class="r"><code>&gt; head(dat1)</code></pre>
-<pre><code>                                                                                                        V1
-1 qno,hgh_prd_cattle,total_TLU_sold,TLUsold_totalTLU,TLUsold_ha,stocking_rate,tlu,cow_inmilk,gene_increase
-2                       BUN03,1,4,0.930232524871826,3.20000004768372,3.44000005722046,4.30000019073486,1,0
-3                                                                                    BUN04,1,0.5,,1.25,,,,
-4                                                                      BUN05,1,0.5,,0.438596457242966,,,,0
-5                                                   BUN08,1,1,2,0.178571432828903,0.089285716414452,0.5,,1
-6                                                       BUN101,1,,,,1.51515138149261,0.899999976158142,1,0</code></pre>
+<pre><code>   V1     V2   V3     V4    V5
+1 Age    FEV   Ht Gender Smoke
+2   9 1.7080 57.0      0     0
+3   8 1.7240 67.5      0     0
+4   7 1.7200 54.5      0     0
+5   9 1.5580 53.0      1     0
+6   9 1.8950 57.0      1     0</code></pre>
 <pre class="r"><code>&gt; str(dat1)</code></pre>
-<pre><code>&#39;data.frame&#39;:   447 obs. of  1 variable:
- $ V1: chr  &quot;qno,hgh_prd_cattle,total_TLU_sold,TLUsold_totalTLU,TLUsold_ha,stocking_rate,tlu,cow_inmilk,gene_increase&quot; &quot;BUN03,1,4,0.930232524871826,3.20000004768372,3.44000005722046,4.30000019073486,1,0&quot; &quot;BUN04,1,0.5,,1.25,,,,&quot; &quot;BUN05,1,0.5,,0.438596457242966,,,,0&quot; ...</code></pre>
+<pre><code>&#39;data.frame&#39;:   655 obs. of  5 variables:
+ $ V1: chr  &quot;Age&quot; &quot;9&quot; &quot;8&quot; &quot;7&quot; ...
+ $ V2: chr  &quot;FEV&quot; &quot;1.7080&quot; &quot;1.7240&quot; &quot;1.7200&quot; ...
+ $ V3: chr  &quot;Ht&quot; &quot;57.0&quot; &quot;67.5&quot; &quot;54.5&quot; ...
+ $ V4: chr  &quot;Gender&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; ...
+ $ V5: chr  &quot;Smoke&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; ...</code></pre>
 <p>Now, that’s <strong>bad</strong>: R has seen a file of 655 records,
 not noticing that the first line is actually not a data record, but the
 header containing the names of the different fields (or columns).
@@ -1263,7 +1296,7 @@ done through the <code>header</code> option that we set to
 numerical values. If we really want to insist that the
 <code>Gender</code> and <code>Smoke</code> variable be treated as
 categorical, we can force the use of specific classes (or “types”) for
-the different columns (the backslach character at the end of a
+the different columns (the backslash character at the end of a
 commandline is just to indicate that the said line continues
 uninterrupted onto the next: the line break was necessary only to fit
 the line into this pagewidth):</p>

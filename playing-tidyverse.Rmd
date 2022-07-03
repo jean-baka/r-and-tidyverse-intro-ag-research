@@ -1,0 +1,129 @@
+---
+title: "First steps with the tidyverse collection"
+author: "Jean-Baka Domelevo Entfellner"
+date: '2022-07-03'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, prompt = TRUE, comment = "", message = FALSE)
+```
+
+
+# Introduction to R packages
+
+In R, **packages** are software modules providing extra functions, operators and datasets. Some packages, like `base` and `stats`, are part of the core R distribution, which means you don't need to install them separately, and they are already loaded in your environment upon starting your R session. When using RStudio, in the bottom right pane, you can see the available packages by clicking the `Packages` tab. The ones that are currently loaded in your environment appear with a tick mark. For those, you don't need to prepend the package name followed by a double colon when you call a function it implements (e.g. you can write `str_sub()` instead of `stringr::str_sub()` if and only if the `stringr` package is already loaded in your environment).
+
+In order to load a package, one calls `library()` with the package name as argument. Quoting is unnecessary.
+
+Before using a package for the first time, you need to download and install it on your computer by calling `install.packages()` with the quoted name of the package as argument.
+
+# Introduction to the tidyverse collection
+
+[tidyverse](https://www.tidyverse.org/) is a collection of open-source packages for R that were primarily developed by Hadley Wickham. Let us list the most common and broadly describe their scope:
+
+  1. `tibble` to work with *tibbles* instead of data frames: tibbles are "smart" data containers that display in a smarter way, with neater type control, etc.
+  2. `readr` to import tabular data from different text files (tab-delimited, csv, fixed-width fields, etc) into tibbles
+  3. `readxl` to import data from Excel files (both .xls and .xlsx) into tibbles
+  4. `tidyr` to transform data with different degrees of "messiness" into **tidy data**. Tidy data is simple to understand, but many datasets you come across are not "tidy". In tidy data, each variable is in its own column, and each observation (a.k.a "case" or "individual") is in its own row. `tidyr` helps you achieve tidy data and reshape datasets by collapsing or splitting columns, creating combinations of cases, handling missing values, etc
+  5. `magrittr` introduces additional pipe operators like `%>%` and `%<>%`
+  5. `dplyr` is for me **the central package** of the tidyverse collection. It's more than a pair of data pliers: it is a whole toolbox to extract information from a dataset, to group, summarize, join, apply functions to several variables, etc.
+  6. `ggplot2` implements a whole "grammar of graphics" and enables the user to create beautiful graphs of various types (scatterplots, histograms, jitter plots, violin plots, scatterplots, bargraphs, smoothed curves, 2D-density plots, etc), tweaking the way they are displayed through simple commands while maintaining a sense of graphical harmony.
+  7. `stringr` enables you to manipulate strings efficiently and effortlessly.
+  8. `purrr` is more advanced and deals with functional programming : programming by manipulating functions as objects
+  9. `forcats` is a re-implementation of R's classical factors (containers for categorical data).
+  
+All these packages constitute a huge programming effort and a considerable contribution
+to the R ecosystem. I name them a "R 2.0". In order to install all of them at once, one goes:
+
+```{r install tidyverse, eval=FALSE}
+install.packages("tidyverse")
+```
+
+The above can take a little bit of time. Then we go:
+
+```{r load tv}
+library(tidyverse) # you could also load only the packages you want to use among those listed above, issuing one or several calls to library()
+```
+
+This opens up a whole world of possibilities, that we are going to explore in the remaining sections of this tutorial.
+
+# The pipe operator
+
+```{r pipe}
+sum(3,7,2) # sum() accepts an arbitrary number of arguments and yields their sum
+# can be written:
+3 %>% sum(7,2)
+```
+
+The pipe operator `%>%` passes what is present on his left hand side as the first argument of the function call on its right hand side.
+
+```{r pipe 2}
+vec <- c(3,5,NA,7)
+vec %>% sum(na.rm = TRUE) # same as sum(vec, na.rm = TRUE)
+```
+
+
+# Reading from files with readxl
+
+We will import into an R object the content of the sheet called "HHcharacteristic" in the file called "Sample data1.xlsx". That is its second sheet. We write a call to the `read_xlsx()` function from the `readxl` package:
+
+```{r read from xlsx, error = TRUE}
+read_xlsx("Sample data1.xlsx", sheet = 2) # fails because readxl is actually not loaded by default when one loads tidyverse, so we go:
+library(readxl)
+read_xlsx("Sample data1.xlsx", sheet = 2) -> households
+str(households)
+```
+
+
+You can see that the data from the excel file has been imported correctly into a tibble (first line of the `str()` report) with 527 rows (observations) and 16 columns (variables).
+
+# Simple summaries the old and new way
+
+There is a column for sex (I guess, males and females). It is encoded as numeric and not as a qualitative variables with two values, so the summary with summary() is rather awkward:
+```{r awkward summary}
+summary(households$sex)
+```
+
+Note that the equivalent to the above but using pipes amounts to:
+
+  1. piping the whole dataset into a function that extracts *as a vector* its `sex` variable, and then
+  2. piping that vector into the `summary()` function.
+  
+Which is done as below:
+
+```{r rewriting summary operation}
+households %>% `$`(sex) %>% summary() # we quote the dollar operator with backticks
+#or
+households %>% `[[`("sex") %>% summary() # a tibble is also a data frame, hence a list of variables (columns), and the double-bracket operator extracts as a vector its named element
+```
+
+So, the summary is not very informative. With `dplyr`, the `summarize` operation (you can also write `summarise`, R accepts British English as well as American English) is meant to calculate a summary (single value) from one or several variables. What we want here is:
+
+  1. to *group* the dataset into groups according to the value of the "sex" variable
+  2. to display the pairs (value, count of observations) for each of the different encodings for the "sex" variable.
+  
+```{r group and summarize}
+households %>% group_by(sex) %>% summarize(count = n())
+```
+
+See the excellent ["Data transformation with dplyr" cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf). That explains the above, which is what I was used to doing until now, but the recent versions of dplyr brought something simpler:
+
+```{r count simpler}
+households %>% count(sex)
+```
+
+
+To get such a neat table was possible in "the old R", of course:
+```{r count table v1}
+summary(as.factor(households$sex)) # transforming into qualitative data so that the summary() yields counts instead of the usual descriptive stats summary with quartiles
+```
+
+Alternatively:
+
+```{r count table v2}
+table(households$sex)
+```
+
+
+But you notice that in both the last two cases (with "the old R"), the result appears as a named vector, which is less tidy to work with than a true tibble.
