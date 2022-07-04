@@ -1,5 +1,5 @@
 ---
-title: "index"
+title: "Welcome to this multi-page R tutorial!"
 author: "Jean-Baka Domelevo Entfellner"
 date: '2022-07-01'
 output: html_document
