@@ -71,12 +71,36 @@ We will import into an R object the content of the sheet called "HHcharacteristi
 ```{r read from xlsx, error = TRUE}
 read_xlsx("Sample data1.xlsx", sheet = 2) # fails because readxl is actually not loaded by default when one loads tidyverse, so we go:
 library(readxl)
-read_xlsx("Sample data1.xlsx", sheet = 2) -> households
-str(households)
+read_xlsx("Sample data1.xlsx", sheet = 2) -> households # works fine
 ```
 
 
-You can see that the data from the excel file has been imported correctly into a tibble (first line of the `str()` report) with 527 rows (observations) and 16 columns (variables).
+
+# Viewing a data frame or tibble
+
+When you want to view the structure of a dataset, you can call the fundamental `str()` function on it:
+```{r str}
+str(households)
+```
+
+You can see that the data from the excel file has been imported correctly into a tibble (first line of the `str()` report) with 527 rows (observations) and 16 columns (variables). Following that, you get a snapshot of each variable (introduced by the `$` character for S3 objects, or the `@`character for S4 objects): its type, its length (in a data frame or tibble, all columns have the same height, being the number of observations) and its first elements (the list that finishes with the three dots).
+
+Displaying tibbles by simply calling their name is not cumbersome (contrary to old-school `data.frame`s for which long outputs are cropped by a not-so-handsome message "[ reached 'max' / getOption("max.print") -- omitted xxx rows ]" while all the columns, however many, are displayed):
+
+```{r displaying tibbles}
+households
+```
+
+You can see the display fits the width of your screen, only the first 10 rows are displayed, and the additional variables (columns are hidden and summarised at the bottom in grey characters).
+
+Finally, in RStudio, you can also use the `View()` function (be careful with the case!) to display a live view of the table as an additional tab in the top left (source editor) pane of RStudio:
+
+```{r View a dataset}
+View(households)
+```
+
+This view is not directly editable, but it is live, meaning that in case you change the dataset, the changes will reflect in the view. Notice you could also get to the same view by clicking on the said dataset within the `Environment` tab of the top right pane in RStudio.
+
 
 # Simple summaries the old and new way
 
@@ -127,3 +151,19 @@ table(households$sex)
 
 
 But you notice that in both the last two cases (with "the old R"), the result appears as a named vector, which is less tidy to work with than a true tibble.
+
+
+# Filtering, slicing, grouping data: using pipes and the power of `dplyr`
+
+Let's see some of the many features offered by the `dplyr` package when it comes to data wrangling.
+
+We can filter some observations, producing a sub-table (still a tibble) containing only the observations matching logical criteria that we state. For example, if we want to build a tibble with only the households with at least 10 years of farming experience:
+
+```{r filtering}
+households %>% filter(hh_experience >= 10)
+
+```
+
+(please note an advantage of using the pipe versus the equivalent syntax `filter(households, hh_experience >=10)`: RStudio autocompletes for you the variable name when you are midway typing `hh_experience` and you hit the `Tab` key)
+
+

@@ -371,25 +371,15 @@ hand side.</p>
 second sheet. We write a call to the <code>read_xlsx()</code> function
 from the <code>readxl</code> package:</p>
 <pre class="r"><code>&gt; read_xlsx(&quot;Sample data1.xlsx&quot;, sheet = 2) # fails because readxl is actually not loaded by default when one loads tidyverse, so we go:</code></pre>
-<pre><code># A tibble: 527 × 16
-   qno   survey  anydairy any_agric   sex   age education hh_experience primary_activity 
-   &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;            
- 1 BUN01 Western        0         1     1    48        12             5 Businessman      
- 2 BUN02 Western        0         1     1    28         8             8 Farm management  
- 3 BUN03 Western        1         1     1    72         4            42 &lt;NA&gt;             
- 4 BUN04 Western        0         1     0    52         0            19 Farm management  
- 5 BUN05 Western        1         1     1    48        12            14 Farm management  
- 6 BUN06 Western        0         1     1    70         4            35 Farm management  
- 7 BUN07 Western        0         1     1    32        12             4 Labourer off farm
- 8 BUN08 Western        1         1     1    38        12            11 Civil servant    
- 9 BUN09 Western        0         1     1    35        10            10 Farm management  
-10 BUN10 Western        0         1     1    40        12            14 Farm management  
-# … with 517 more rows, and 7 more variables: adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;,
-#   depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;, offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;,
-#   off_farm_percent &lt;dbl&gt;</code></pre>
+<pre><code>Error in read_xlsx(&quot;Sample data1.xlsx&quot;, sheet = 2): could not find function &quot;read_xlsx&quot;</code></pre>
 <pre class="r"><code>&gt; library(readxl)
-&gt; read_xlsx(&quot;Sample data1.xlsx&quot;, sheet = 2) -&gt; households
-&gt; str(households)</code></pre>
+&gt; read_xlsx(&quot;Sample data1.xlsx&quot;, sheet = 2) -&gt; households # works fine</code></pre>
+</div>
+<div id="viewing-a-data-frame-or-tibble" class="section level1">
+<h1>Viewing a data frame or tibble</h1>
+<p>When you want to view the structure of a dataset, you can call the
+fundamental <code>str()</code> function on it:</p>
+<pre class="r"><code>&gt; str(households)</code></pre>
 <pre><code>tibble [527 × 16] (S3: tbl_df/tbl/data.frame)
  $ qno             : chr [1:527] &quot;BUN01&quot; &quot;BUN02&quot; &quot;BUN03&quot; &quot;BUN04&quot; ...
  $ survey          : chr [1:527] &quot;Western&quot; &quot;Western&quot; &quot;Western&quot; &quot;Western&quot; ...
@@ -409,7 +399,47 @@ from the <code>readxl</code> package:</p>
  $ off_farm_percent: num [1:527] 0.5 1 0.2 0.667 0.5 ...</code></pre>
 <p>You can see that the data from the excel file has been imported
 correctly into a tibble (first line of the <code>str()</code> report)
-with 527 rows (observations) and 16 columns (variables).</p>
+with 527 rows (observations) and 16 columns (variables). Following that,
+you get a snapshot of each variable (introduced by the <code>$</code>
+character for S3 objects, or the <code>@</code>character for S4
+objects): its type, its length (in a data frame or tibble, all columns
+have the same height, being the number of observations) and its first
+elements (the list that finishes with the three dots).</p>
+<p>Displaying tibbles by simply calling their name is not cumbersome
+(contrary to old-school <code>data.frame</code>s for which long outputs
+are cropped by a not-so-handsome message “[ reached ‘max’ /
+getOption(”max.print”) – omitted xxx rows ]” while all the columns,
+however many, are displayed):</p>
+<pre class="r"><code>&gt; households</code></pre>
+<pre><code># A tibble: 527 × 16
+   qno   survey  anydairy any_agric   sex   age education hh_experience
+   &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+ 1 BUN01 Western        0         1     1    48        12             5
+ 2 BUN02 Western        0         1     1    28         8             8
+ 3 BUN03 Western        1         1     1    72         4            42
+ 4 BUN04 Western        0         1     0    52         0            19
+ 5 BUN05 Western        1         1     1    48        12            14
+ 6 BUN06 Western        0         1     1    70         4            35
+ 7 BUN07 Western        0         1     1    32        12             4
+ 8 BUN08 Western        1         1     1    38        12            11
+ 9 BUN09 Western        0         1     1    35        10            10
+10 BUN10 Western        0         1     1    40        12            14
+# … with 517 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
+#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
+#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
+<p>You can see the display fits the width of your screen, only the first
+10 rows are displayed, and the additional variables (columns are hidden
+and summarised at the bottom in grey characters).</p>
+<p>Finally, in RStudio, you can also use the <code>View()</code>
+function (be careful with the case!) to display a live view of the table
+as an additional tab in the top left (source editor) pane of
+RStudio:</p>
+<pre class="r"><code>&gt; View(households)</code></pre>
+<p>This view is not directly editable, but it is live, meaning that in
+case you change the dataset, the changes will reflect in the view.
+Notice you could also get to the same view by clicking on the said
+dataset within the <code>Environment</code> tab of the top right pane in
+RStudio.</p>
 </div>
 <div id="simple-summaries-the-old-and-new-way" class="section level1">
 <h1>Simple summaries the old and new way</h1>
@@ -473,6 +503,39 @@ dplyr brought something simpler:</p>
 <p>But you notice that in both the last two cases (with “the old R”),
 the result appears as a named vector, which is less tidy to work with
 than a true tibble.</p>
+</div>
+<div
+id="filtering-slicing-grouping-data-using-pipes-and-the-power-of-dplyr"
+class="section level1">
+<h1>Filtering, slicing, grouping data: using pipes and the power of
+<code>dplyr</code></h1>
+<p>Let’s see some of the many features offered by the <code>dplyr</code>
+package when it comes to data wrangling.</p>
+<p>We can filter some observations, producing a sub-table (still a
+tibble) containing only the observations matching logical criteria that
+we state. For example, if we want to build a tibble with only the
+households with at least 10 years of farming experience:</p>
+<pre class="r"><code>&gt; households %&gt;% filter(hh_experience &gt;= 10)</code></pre>
+<pre><code># A tibble: 339 × 16
+   qno    survey  anydairy any_agric   sex   age education hh_experience
+   &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+ 1 BUN03  Western        1         1     1    72         4            42
+ 2 BUN04  Western        0         1     0    52         0            19
+ 3 BUN05  Western        1         1     1    48        12            14
+ 4 BUN06  Western        0         1     1    70         4            35
+ 5 BUN08  Western        1         1     1    38        12            11
+ 6 BUN09  Western        0         1     1    35        10            10
+ 7 BUN10  Western        0         1     1    40        12            14
+ 8 BUN103 Western        1         1     0    54         4            38
+ 9 BUN105 Western        1         1     1    50        12            25
+10 BUN106 Western        1         1     1    30         8            10
+# … with 329 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
+#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
+#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
+<p>(please note an advantage of using the pipe versus the equivalent
+syntax <code>filter(households, hh_experience &gt;=10)</code>: RStudio
+autocompletes for you the variable name when you are midway typing
+<code>hh_experience</code> and you hit the <code>Tab</code> key)</p>
 </div>
 
 

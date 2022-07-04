@@ -11,3 +11,12 @@ navbar:
       href: intro-base-R.html
     - text: "Exploring a dataset with tidyverse"
       href: playing-tidyverse.html
+  right:
+    - text: "Sample datasets"
+      menu:
+        - text: "fev_dataset.txt"
+          href: fev_dataset.txt
+        - text: "livestockTLU.csv"
+          href: livestockTLU.csv
+        - text: "livestock_data.xlsx"
+          href: livestock_data.xlsx
