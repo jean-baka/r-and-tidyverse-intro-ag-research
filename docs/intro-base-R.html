@@ -261,7 +261,24 @@ $(document).ready(function () {
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Sample datasets
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="fev_dataset.txt">fev_dataset.txt</a>
+    </li>
+    <li>
+      <a href="livestockTLU.csv">livestockTLU.csv</a>
+    </li>
+    <li>
+      <a href="livestock_data.xlsx">livestock_data.xlsx</a>
+    </li>
+  </ul>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -389,7 +406,13 @@ or “environment”: it returns a vector populated with strings giving the
 names of these objects present in your current R environment (i.e. the
 variables you defined earlier in your interactive session).</p>
 <pre class="r"><code>&gt; ls()</code></pre>
-<pre><code>[1] &quot;a&quot;          &quot;b&quot;          &quot;households&quot; &quot;myvec&quot;      &quot;vec&quot;       </code></pre>
+<pre><code> [1] &quot;a&quot;            &quot;av1&quot;          &quot;av2&quot;          &quot;av3&quot;          &quot;av4&quot;         
+ [6] &quot;av5&quot;          &quot;av6&quot;          &quot;b&quot;            &quot;blood_groups&quot; &quot;dat1&quot;        
+[11] &quot;filter&quot;       &quot;households&quot;   &quot;iris2&quot;        &quot;iris3&quot;        &quot;last_row&quot;    
+[16] &quot;list1&quot;        &quot;list2&quot;        &quot;mat1&quot;         &quot;mat2&quot;         &quot;mat3&quot;        
+[21] &quot;mat4&quot;         &quot;mat5&quot;         &quot;my_column&quot;    &quot;mydat&quot;        &quot;mydir&quot;       
+[26] &quot;myvec&quot;        &quot;oldnames&quot;     &quot;responses&quot;    &quot;subset1&quot;      &quot;transformed&quot; 
+[31] &quot;vec&quot;         </code></pre>
 <p>Beware!! If you omit the parentheses, R will try and evaluate
 <strong>the function itself</strong>:</p>
 <pre class="r"><code>&gt; ls</code></pre>
@@ -1076,7 +1099,7 @@ frame:</p>
 &gt; cbind(my_column, iris) -&gt; iris2
 &gt; str(iris2)</code></pre>
 <pre><code>&#39;data.frame&#39;:   150 obs. of  6 variables:
- $ my_column   : num  45398 81456 16181 43597 44161 ...
+ $ my_column   : num  17175 58120 27703 16936 12692 ...
  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
@@ -1097,18 +1120,15 @@ dataframe made of numeric values:</p>
 &gt; av6=names(which.max(table(iris2[,6]))) # # to get the most common category in this factor
 &gt; rbind(iris2,c(av1,av2,av3,av4,av5,av6)) -&gt; iris3
 &gt; tail(iris3, n=2)</code></pre>
-<pre><code>                  ID     Sepal.Length      Sepal.Width Petal.Length      Petal.Width
-150            65928              5.9                3          5.1              1.8
-151 53944.2333333333 5.84333333333333 3.05733333333333        3.758 1.19933333333333
-      Species
-150 virginica
-151    setosa</code></pre>
+<pre><code>         ID     Sepal.Length      Sepal.Width Petal.Length      Petal.Width   Species
+150   10083              5.9                3          5.1              1.8 virginica
+151 50274.7 5.84333333333333 3.05733333333333        3.758 1.19933333333333    setosa</code></pre>
 <p>So it seems that we are fine: the line containing the average values
 of all the columns has been added at the bottom of the dataframe. But
 let’s look at the structure of our new <code>iris3</code> variable:</p>
 <pre class="r"><code>&gt; str(iris3)</code></pre>
 <pre><code>&#39;data.frame&#39;:   151 obs. of  6 variables:
- $ ID          : chr  &quot;45398&quot; &quot;81456&quot; &quot;16181&quot; &quot;43597&quot; ...
+ $ ID          : chr  &quot;17175&quot; &quot;58120&quot; &quot;27703&quot; &quot;16936&quot; ...
  $ Sepal.Length: chr  &quot;5.1&quot; &quot;4.9&quot; &quot;4.7&quot; &quot;4.6&quot; ...
  $ Sepal.Width : chr  &quot;3.5&quot; &quot;3&quot; &quot;3.2&quot; &quot;3.1&quot; ...
  $ Petal.Length: chr  &quot;1.4&quot; &quot;1.4&quot; &quot;1.3&quot; &quot;1.5&quot; ...
@@ -1130,10 +1150,10 @@ lots of basic objects accept conversion to strings by means of the
 <pre class="r"><code>&gt; mode(av6)</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>
 <pre class="r"><code>&gt; av1</code></pre>
-<pre><code>[1] 53944.23</code></pre>
+<pre><code>[1] 50274.7</code></pre>
 <pre class="r"><code>&gt; c(av1,av2,av3,av4,av5,av6) -&gt; last_row
 &gt; last_row</code></pre>
-<pre><code>[1] &quot;53944.2333333333&quot; &quot;5.84333333333333&quot; &quot;3.05733333333333&quot; &quot;3.758&quot;           
+<pre><code>[1] &quot;50274.7&quot;          &quot;5.84333333333333&quot; &quot;3.05733333333333&quot; &quot;3.758&quot;           
 [5] &quot;1.19933333333333&quot; &quot;setosa&quot;          </code></pre>
 <pre class="r"><code>&gt; mode(last_row)</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>
