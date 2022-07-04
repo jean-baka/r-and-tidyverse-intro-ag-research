@@ -1,7 +1,7 @@
 ---
 title: "First steps with the tidyverse collection"
 author: "Jean-Baka Domelevo Entfellner"
-date: '2022-07-03'
+date: "Last updated on `r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
 
@@ -66,12 +66,12 @@ vec %>% sum(na.rm = TRUE) # same as sum(vec, na.rm = TRUE)
 
 # Reading from files with readxl
 
-We will import into an R object the content of the sheet called "HHcharacteristic" in the file called "Sample data1.xlsx". That is its second sheet. We write a call to the `read_xlsx()` function from the `readxl` package:
+We will import into an R object the content of the sheet called "HHcharacteristic" in the file `livestock_data.xlsx`. That is its second sheet. We write a call to the `read_xlsx()` function from the `readxl` package:
 
 ```{r read from xlsx, error = TRUE}
-read_xlsx("Sample data1.xlsx", sheet = 2) # fails because readxl is actually not loaded by default when one loads tidyverse, so we go:
+read_xlsx("livestock_data.xlsx", sheet = 2) # fails because readxl is actually not loaded by default when one loads tidyverse, so we go:
 library(readxl)
-read_xlsx("Sample data1.xlsx", sheet = 2) -> households # works fine
+read_xlsx("livestock_data.xlsx", sheet = 2) -> households # works fine
 ```
 
 
@@ -160,10 +160,15 @@ Let's see some of the many features offered by the `dplyr` package when it comes
 We can filter some observations, producing a sub-table (still a tibble) containing only the observations matching logical criteria that we state. For example, if we want to build a tibble with only the households with at least 10 years of farming experience:
 
 ```{r filtering}
-households %>% filter(hh_experience >= 10)
-
+households %>% filter(hh_experience >= 10) # 339 observations
 ```
 
 (please note an advantage of using the pipe versus the equivalent syntax `filter(households, hh_experience >=10)`: RStudio autocompletes for you the variable name when you are midway typing `hh_experience` and you hit the `Tab` key)
 
+You can also filter the dataset based on a series of requirements, all to be fulfilled simultaneously (logical AND). Just make them several arguments to your call to `filter`. For instance, to select the the households with at least 10 years of farming experience **and** where the main person is a civil servant:
 
+```{r filtering more}
+households %>% filter(hh_experience >= 10, primary_activity == "Civil servant")
+```
+
+Only 21 observations remaining.

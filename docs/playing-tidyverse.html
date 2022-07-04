@@ -11,7 +11,6 @@
 
 <meta name="author" content="Jean-Baka Domelevo Entfellner" />
 
-<meta name="date" content="2022-07-03" />
 
 <title>First steps with the tidyverse collection</title>
 
@@ -291,7 +290,7 @@ $(document).ready(function () {
 <h1 class="title toc-ignore">First steps with the tidyverse
 collection</h1>
 <h4 class="author">Jean-Baka Domelevo Entfellner</h4>
-<h4 class="date">2022-07-03</h4>
+<h4 class="date">Last updated on 04 July, 2022</h4>
 
 </div>
 
@@ -384,14 +383,13 @@ hand side.</p>
 <div id="reading-from-files-with-readxl" class="section level1">
 <h1>Reading from files with readxl</h1>
 <p>We will import into an R object the content of the sheet called
-“HHcharacteristic” in the file called “Sample data1.xlsx”. That is its
-second sheet. We write a call to the <code>read_xlsx()</code> function
-from the <code>readxl</code> package:</p>
-<pre class="r"><code>&gt; read_xlsx(&quot;Sample data1.xlsx&quot;, sheet = 2) # fails because readxl is actually not loaded by default when one loads tidyverse, so we go:</code></pre>
-<pre><code>Error: `path` does not exist: &#39;Sample data1.xlsx&#39;</code></pre>
+“HHcharacteristic” in the file <code>livestock_data.xlsx</code>. That is
+its second sheet. We write a call to the <code>read_xlsx()</code>
+function from the <code>readxl</code> package:</p>
+<pre class="r"><code>&gt; read_xlsx(&quot;livestock_data.xlsx&quot;, sheet = 2) # fails because readxl is actually not loaded by default when one loads tidyverse, so we go:</code></pre>
+<pre><code>Error in read_xlsx(&quot;livestock_data.xlsx&quot;, sheet = 2): could not find function &quot;read_xlsx&quot;</code></pre>
 <pre class="r"><code>&gt; library(readxl)
-&gt; read_xlsx(&quot;Sample data1.xlsx&quot;, sheet = 2) -&gt; households # works fine</code></pre>
-<pre><code>Error: `path` does not exist: &#39;Sample data1.xlsx&#39;</code></pre>
+&gt; read_xlsx(&quot;livestock_data.xlsx&quot;, sheet = 2) -&gt; households # works fine</code></pre>
 </div>
 <div id="viewing-a-data-frame-or-tibble" class="section level1">
 <h1>Viewing a data frame or tibble</h1>
@@ -430,21 +428,21 @@ getOption(”max.print”) – omitted xxx rows ]” while all the columns,
 however many, are displayed):</p>
 <pre class="r"><code>&gt; households</code></pre>
 <pre><code># A tibble: 527 × 16
-   qno   survey  anydairy any_agric   sex   age education hh_experience primary_activity 
-   &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;            
- 1 BUN01 Western        0         1     1    48        12             5 Businessman      
- 2 BUN02 Western        0         1     1    28         8             8 Farm management  
- 3 BUN03 Western        1         1     1    72         4            42 &lt;NA&gt;             
- 4 BUN04 Western        0         1     0    52         0            19 Farm management  
- 5 BUN05 Western        1         1     1    48        12            14 Farm management  
- 6 BUN06 Western        0         1     1    70         4            35 Farm management  
- 7 BUN07 Western        0         1     1    32        12             4 Labourer off farm
- 8 BUN08 Western        1         1     1    38        12            11 Civil servant    
- 9 BUN09 Western        0         1     1    35        10            10 Farm management  
-10 BUN10 Western        0         1     1    40        12            14 Farm management  
-# … with 517 more rows, and 7 more variables: adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;,
-#   depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;, offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;,
-#   off_farm_percent &lt;dbl&gt;</code></pre>
+   qno   survey  anydairy any_agric   sex   age education hh_experience
+   &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+ 1 BUN01 Western        0         1     1    48        12             5
+ 2 BUN02 Western        0         1     1    28         8             8
+ 3 BUN03 Western        1         1     1    72         4            42
+ 4 BUN04 Western        0         1     0    52         0            19
+ 5 BUN05 Western        1         1     1    48        12            14
+ 6 BUN06 Western        0         1     1    70         4            35
+ 7 BUN07 Western        0         1     1    32        12             4
+ 8 BUN08 Western        1         1     1    38        12            11
+ 9 BUN09 Western        0         1     1    35        10            10
+10 BUN10 Western        0         1     1    40        12            14
+# … with 517 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
+#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
+#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
 <p>You can see the display fits the width of your screen, only the first
 10 rows are displayed, and the additional variables (columns are hidden
 and summarised at the bottom in grey characters).</p>
@@ -533,27 +531,50 @@ package when it comes to data wrangling.</p>
 tibble) containing only the observations matching logical criteria that
 we state. For example, if we want to build a tibble with only the
 households with at least 10 years of farming experience:</p>
-<pre class="r"><code>&gt; households %&gt;% filter(hh_experience &gt;= 10)</code></pre>
+<pre class="r"><code>&gt; households %&gt;% filter(hh_experience &gt;= 10) # 339 observations</code></pre>
 <pre><code># A tibble: 339 × 16
-   qno    survey  anydairy any_agric   sex   age education hh_experience primary_activity
-   &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;           
- 1 BUN03  Western        1         1     1    72         4            42 &lt;NA&gt;            
- 2 BUN04  Western        0         1     0    52         0            19 Farm management 
- 3 BUN05  Western        1         1     1    48        12            14 Farm management 
- 4 BUN06  Western        0         1     1    70         4            35 Farm management 
- 5 BUN08  Western        1         1     1    38        12            11 Civil servant   
- 6 BUN09  Western        0         1     1    35        10            10 Farm management 
- 7 BUN10  Western        0         1     1    40        12            14 Farm management 
- 8 BUN103 Western        1         1     0    54         4            38 Farm management 
- 9 BUN105 Western        1         1     1    50        12            25 Farm management 
-10 BUN106 Western        1         1     1    30         8            10 Farm management 
-# … with 329 more rows, and 7 more variables: adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;,
-#   depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;, offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;,
-#   off_farm_percent &lt;dbl&gt;</code></pre>
+   qno    survey  anydairy any_agric   sex   age education hh_experience
+   &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+ 1 BUN03  Western        1         1     1    72         4            42
+ 2 BUN04  Western        0         1     0    52         0            19
+ 3 BUN05  Western        1         1     1    48        12            14
+ 4 BUN06  Western        0         1     1    70         4            35
+ 5 BUN08  Western        1         1     1    38        12            11
+ 6 BUN09  Western        0         1     1    35        10            10
+ 7 BUN10  Western        0         1     1    40        12            14
+ 8 BUN103 Western        1         1     0    54         4            38
+ 9 BUN105 Western        1         1     1    50        12            25
+10 BUN106 Western        1         1     1    30         8            10
+# … with 329 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
+#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
+#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
 <p>(please note an advantage of using the pipe versus the equivalent
 syntax <code>filter(households, hh_experience &gt;=10)</code>: RStudio
 autocompletes for you the variable name when you are midway typing
 <code>hh_experience</code> and you hit the <code>Tab</code> key)</p>
+<p>You can also filter the dataset based on a series of requirements,
+all to be fulfilled simultaneously (logical AND). Just make them several
+arguments to your call to <code>filter</code>. For instance, to select
+the the households with at least 10 years of farming experience
+<strong>and</strong> where the main person is a civil servant:</p>
+<pre class="r"><code>&gt; households %&gt;% filter(hh_experience &gt;= 10, primary_activity == &quot;Civil servant&quot;)</code></pre>
+<pre><code># A tibble: 21 × 16
+   qno       survey  anydairy any_agric   sex   age education hh_experience
+   &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+ 1 BUN08     Western        1         1     1    38        12            11
+ 2 BUN12     Western        1         1     1    54        12            27
+ 3 BUN138    Western        1         1     1    50        17            17
+ 4 BUN20     Western        1         1     1    43        17            16
+ 5 BUN32     Western        1         1     1    43        10            10
+ 6 BUN37     Western        1         1     1    54        12            28
+ 7 KIA12089  Kiambu         1         1     1    38        15            11
+ 8 KIA121113 Kiambu         1         1     1    37        15            10
+ 9 KIA121116 Kiambu         1         1     0    34        11            15
+10 KIA121814 Kiambu         1         1     1    50        11            21
+# … with 11 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
+#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
+#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
+<p>Only 21 observations remaining.</p>
 </div>
 
 
