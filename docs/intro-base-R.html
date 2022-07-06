@@ -283,6 +283,12 @@ $(document).ready(function () {
     <li>
       <a href="script_day2_am.R">Day 2 morning</a>
     </li>
+    <li>
+      <a href="alal">Day 2 afternoon (stats)</a>
+    </li>
+    <li>
+      <a href="script_day2_pm_JB.R">Day 2 afternoon (ggplot2)</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -435,16 +441,18 @@ variables you defined earlier in your interactive session).</p>
 <pre class="r"><code>&gt; ls()</code></pre>
 <pre><code> [1] &quot;a&quot;                  &quot;av1&quot;                &quot;av2&quot;               
  [4] &quot;av3&quot;                &quot;av4&quot;                &quot;av5&quot;               
- [7] &quot;av6&quot;                &quot;b&quot;                  &quot;blood_groups&quot;      
-[10] &quot;cs_aged_50&quot;         &quot;dat1&quot;               &quot;filter&quot;            
-[13] &quot;hh_aged_50&quot;         &quot;households&quot;         &quot;iris2&quot;             
-[16] &quot;iris3&quot;              &quot;last_row&quot;           &quot;list1&quot;             
-[19] &quot;list2&quot;              &quot;livestock_with_IDs&quot; &quot;livestockTLU&quot;      
-[22] &quot;mat1&quot;               &quot;mat2&quot;               &quot;mat3&quot;              
-[25] &quot;mat4&quot;               &quot;mat5&quot;               &quot;my_column&quot;         
-[28] &quot;mydat&quot;              &quot;mydir&quot;              &quot;myvec&quot;             
-[31] &quot;no_age_greater_70&quot;  &quot;oldnames&quot;           &quot;responses&quot;         
-[34] &quot;subset1&quot;            &quot;transformed&quot;        &quot;vec&quot;               </code></pre>
+ [7] &quot;av6&quot;                &quot;b&quot;                  &quot;base_plot&quot;         
+[10] &quot;blood_groups&quot;       &quot;contingency_base&quot;   &quot;contingency_tibble&quot;
+[13] &quot;cs_aged_50&quot;         &quot;dat1&quot;               &quot;filter&quot;            
+[16] &quot;hh_aged_50&quot;         &quot;households&quot;         &quot;iris2&quot;             
+[19] &quot;iris3&quot;              &quot;last_row&quot;           &quot;lgc&quot;               
+[22] &quot;list1&quot;              &quot;list2&quot;              &quot;livestock_with_IDs&quot;
+[25] &quot;livestockTLU&quot;       &quot;mat1&quot;               &quot;mat2&quot;              
+[28] &quot;mat3&quot;               &quot;mat4&quot;               &quot;mat5&quot;              
+[31] &quot;my_column&quot;          &quot;mydat&quot;              &quot;mydir&quot;             
+[34] &quot;myvec&quot;              &quot;no_age_greater_70&quot;  &quot;oldnames&quot;          
+[37] &quot;responses&quot;          &quot;subset1&quot;            &quot;transformed&quot;       
+[40] &quot;vec&quot;                &quot;with_title&quot;        </code></pre>
 <p>Beware!! If you omit the parentheses, R will try and evaluate
 <strong>the function itself</strong>:</p>
 <pre class="r"><code>&gt; ls</code></pre>
@@ -1152,7 +1160,7 @@ frame:</p>
 &gt; cbind(my_column, iris) -&gt; iris2
 &gt; str(iris2)</code></pre>
 <pre><code>&#39;data.frame&#39;:   150 obs. of  6 variables:
- $ my_column   : num  51954 97686 21033 40948 10374 ...
+ $ my_column   : num  78615 31479 59822 20272 11252 ...
  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
@@ -1173,18 +1181,18 @@ dataframe made of numeric values:</p>
 &gt; av6=names(which.max(table(iris2[,6]))) # # to get the most common category in this factor
 &gt; rbind(iris2,c(av1,av2,av3,av4,av5,av6)) -&gt; iris3
 &gt; tail(iris3, n=2)</code></pre>
-<pre><code>       ID     Sepal.Length      Sepal.Width Petal.Length      Petal.Width
-150 53525              5.9                3          5.1              1.8
-151 49855 5.84333333333333 3.05733333333333        3.758 1.19933333333333
-      Species
-150 virginica
-151    setosa</code></pre>
+<pre><code>                  ID     Sepal.Length      Sepal.Width Petal.Length
+150            17692              5.9                3          5.1
+151 51309.5666666667 5.84333333333333 3.05733333333333        3.758
+         Petal.Width   Species
+150              1.8 virginica
+151 1.19933333333333    setosa</code></pre>
 <p>So it seems that we are fine: the line containing the average values
 of all the columns has been added at the bottom of the dataframe. But
 let’s look at the structure of our new <code>iris3</code> variable:</p>
 <pre class="r"><code>&gt; str(iris3)</code></pre>
 <pre><code>&#39;data.frame&#39;:   151 obs. of  6 variables:
- $ ID          : chr  &quot;51954&quot; &quot;97686&quot; &quot;21033&quot; &quot;40948&quot; ...
+ $ ID          : chr  &quot;78615&quot; &quot;31479&quot; &quot;59822&quot; &quot;20272&quot; ...
  $ Sepal.Length: chr  &quot;5.1&quot; &quot;4.9&quot; &quot;4.7&quot; &quot;4.6&quot; ...
  $ Sepal.Width : chr  &quot;3.5&quot; &quot;3&quot; &quot;3.2&quot; &quot;3.1&quot; ...
  $ Petal.Length: chr  &quot;1.4&quot; &quot;1.4&quot; &quot;1.3&quot; &quot;1.5&quot; ...
@@ -1206,10 +1214,10 @@ lots of basic objects accept conversion to strings by means of the
 <pre class="r"><code>&gt; mode(av6)</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>
 <pre class="r"><code>&gt; av1</code></pre>
-<pre><code>[1] 49855</code></pre>
+<pre><code>[1] 51309.57</code></pre>
 <pre class="r"><code>&gt; c(av1,av2,av3,av4,av5,av6) -&gt; last_row
 &gt; last_row</code></pre>
-<pre><code>[1] &quot;49855&quot;            &quot;5.84333333333333&quot; &quot;3.05733333333333&quot;
+<pre><code>[1] &quot;51309.5666666667&quot; &quot;5.84333333333333&quot; &quot;3.05733333333333&quot;
 [4] &quot;3.758&quot;            &quot;1.19933333333333&quot; &quot;setosa&quot;          </code></pre>
 <pre class="r"><code>&gt; mode(last_row)</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>

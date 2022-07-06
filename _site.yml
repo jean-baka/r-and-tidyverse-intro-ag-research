@@ -24,6 +24,10 @@ navbar:
           href: whiteboard_scribblings_Tuesday.pdf
         - text: "Day 2 morning"
           href: script_day2_am.R
+        - text: "Day 2 afternoon (stats)"
+          href: alal
+        - text: "Day 2 afternoon (ggplot2)"
+          href: script_day2_pm_JB.R
     - text: "Sample datasets"
       menu:
         - text: "fev_dataset.txt"
