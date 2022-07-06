@@ -11,15 +11,19 @@ navbar:
       href: intro-base-R.html
     - text: "Exploring a dataset with tidyverse"
       href: playing-tidyverse.html
+    - text: "Univariate stats"
+      href: Univariable\ Stats.pdf
   right:
     - text: "Training workshop scripts"
       menu:
-        - text: "Tuesday morning"
+        - text: "Day 1 morning"
           href: script_day1_am.R
-        - text: "Tuesday afternoon"
+        - text: "Day 1 afternoon"
           href: script_day1_pm.R
-        - text: "Whiteboard scribblings Tuesday"
+        - text: "Whiteboard scribblings Day 1"
           href: whiteboard_scribblings_Tuesday.pdf
+        - text: "Day 2 morning"
+          href: script_day2_am.R
     - text: "Sample datasets"
       menu:
         - text: "fev_dataset.txt"
@@ -28,3 +32,5 @@ navbar:
           href: livestockTLU.csv
         - text: "livestock_data.xlsx"
           href: livestock_data.xlsx
+        - text: "Lungcancer.csv"
+          href: Lungcancer.csv

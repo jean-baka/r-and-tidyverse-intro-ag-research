@@ -1,6 +1,6 @@
 ---
 title: "Welcome to this multi-page R tutorial!"
-author: "Jean-Baka Domelevo Entfellner"
+author: "Jean-Baka Domelevo Entfellner & Dishon Muloi"
 date: "Last updated on `r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
