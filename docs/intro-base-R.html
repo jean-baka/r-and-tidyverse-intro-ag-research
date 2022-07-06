@@ -274,6 +274,9 @@ $(document).ready(function () {
     <li>
       <a href="script_day1_pm.R">Tuesday afternoon</a>
     </li>
+    <li>
+      <a href="whiteboard_scribblings_Tuesday.pdf">Whiteboard scribblings Tuesday</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -421,9 +424,17 @@ or “environment”: it returns a vector populated with strings giving the
 names of these objects present in your current R environment (i.e. the
 variables you defined earlier in your interactive session).</p>
 <pre class="r"><code>&gt; ls()</code></pre>
-<pre><code> [1] &quot;a&quot;          &quot;b&quot;          &quot;country254&quot; &quot;mixed_vec&quot;  &quot;myvec&quot;     
- [6] &quot;normvec&quot;    &quot;summ&quot;       &quot;thous_unif&quot; &quot;TLUtable&quot;   &quot;unit&quot;      
-[11] &quot;v1&quot;         &quot;v2&quot;         &quot;v6&quot;        </code></pre>
+<pre><code> [1] &quot;a&quot;            &quot;av1&quot;          &quot;av2&quot;          &quot;av3&quot;         
+ [5] &quot;av4&quot;          &quot;av5&quot;          &quot;av6&quot;          &quot;b&quot;           
+ [9] &quot;blood_groups&quot; &quot;country254&quot;   &quot;dat1&quot;         &quot;filter&quot;      
+[13] &quot;households&quot;   &quot;iris2&quot;        &quot;iris3&quot;        &quot;last_row&quot;    
+[17] &quot;list1&quot;        &quot;list2&quot;        &quot;mat1&quot;         &quot;mat2&quot;        
+[21] &quot;mat3&quot;         &quot;mat4&quot;         &quot;mat5&quot;         &quot;mixed_vec&quot;   
+[25] &quot;my_column&quot;    &quot;mydat&quot;        &quot;mydir&quot;        &quot;myvec&quot;       
+[29] &quot;normvec&quot;      &quot;oldnames&quot;     &quot;responses&quot;    &quot;subset1&quot;     
+[33] &quot;summ&quot;         &quot;thous_unif&quot;   &quot;TLUtable&quot;     &quot;transformed&quot; 
+[37] &quot;unit&quot;         &quot;v1&quot;           &quot;v2&quot;           &quot;v6&quot;          
+[41] &quot;vec&quot;         </code></pre>
 <p>Beware!! If you omit the parentheses, R will try and evaluate
 <strong>the function itself</strong>:</p>
 <pre class="r"><code>&gt; ls</code></pre>
@@ -774,9 +785,9 @@ repeated patterns of five nucleotides (A, C, A, T, G): there will be
 twice as many A’s as any of the other three nucleotides.</p>
 <pre class="r"><code>&gt; mat5=matrix(c(&#39;A&#39;,&#39;C&#39;,&#39;A&#39;,&#39;T&#39;,&#39;G&#39;),nrow=10,ncol=42,byrow=T)
 &gt; mat5[1,] # just to check the first line...</code></pre>
-<pre><code> [1] &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot;
-[17] &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot;
-[33] &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot;</code></pre>
+<pre><code> [1] &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot;
+[16] &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot;
+[31] &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot;</code></pre>
 <pre class="r"><code>&gt; mat5 == &quot;G&quot;  # vectorized comparison to &quot;G&quot;</code></pre>
 <pre><code>       [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]  [,9] [,10]
  [1,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
@@ -999,31 +1010,31 @@ summary of all numerical variables:</p>
 <p>As we have already seen, the dollar sign is used to designate a field
 from a data frame:</p>
 <pre class="r"><code>&gt; iris$Sepal.Length</code></pre>
-<pre><code>  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7
- [17] 5.4 5.1 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4
- [33] 5.2 5.5 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6
- [49] 5.3 5.0 7.0 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2 5.0 5.9 6.0 6.1
- [65] 5.6 6.7 5.6 5.8 6.2 5.6 5.9 6.1 6.3 6.1 6.4 6.6 6.8 6.7 6.0 5.7
- [81] 5.5 5.5 5.8 6.0 5.4 6.0 6.7 6.3 5.6 5.5 5.5 6.1 5.8 5.0 5.6 5.7
- [97] 5.7 6.2 5.1 5.7 6.3 5.8 7.1 6.3 6.5 7.6 4.9 7.3 6.7 7.2 6.5 6.4
-[113] 6.8 5.7 5.8 6.4 6.5 7.7 7.7 6.0 6.9 5.6 7.7 6.3 6.7 7.2 6.2 6.1
-[129] 6.4 7.2 7.4 7.9 6.4 6.3 6.1 7.7 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8
-[145] 6.7 6.7 6.3 6.5 6.2 5.9</code></pre>
+<pre><code>  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8
+ [16] 5.7 5.4 5.1 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7
+ [31] 4.8 5.4 5.2 5.5 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1
+ [46] 4.8 5.1 4.6 5.3 5.0 7.0 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2
+ [61] 5.0 5.9 6.0 6.1 5.6 6.7 5.6 5.8 6.2 5.6 5.9 6.1 6.3 6.1 6.4
+ [76] 6.6 6.8 6.7 6.0 5.7 5.5 5.5 5.8 6.0 5.4 6.0 6.7 6.3 5.6 5.5
+ [91] 5.5 6.1 5.8 5.0 5.6 5.7 5.7 6.2 5.1 5.7 6.3 5.8 7.1 6.3 6.5
+[106] 7.6 4.9 7.3 6.7 7.2 6.5 6.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7 6.0
+[121] 6.9 5.6 7.7 6.3 6.7 7.2 6.2 6.1 6.4 7.2 7.4 7.9 6.4 6.3 6.1
+[136] 7.7 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8 6.7 6.7 6.3 6.5 6.2 5.9</code></pre>
 <p>Note that we could also use the good old square bracket notation to
 select that column: a data frame resembles a matrix where column are not
 designated with their indices, but with names (strings of
 characters):</p>
 <pre class="r"><code>&gt; iris[,&#39;Sepal.Length&#39;]</code></pre>
-<pre><code>  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8 5.7
- [17] 5.4 5.1 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7 4.8 5.4
- [33] 5.2 5.5 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1 4.8 5.1 4.6
- [49] 5.3 5.0 7.0 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2 5.0 5.9 6.0 6.1
- [65] 5.6 6.7 5.6 5.8 6.2 5.6 5.9 6.1 6.3 6.1 6.4 6.6 6.8 6.7 6.0 5.7
- [81] 5.5 5.5 5.8 6.0 5.4 6.0 6.7 6.3 5.6 5.5 5.5 6.1 5.8 5.0 5.6 5.7
- [97] 5.7 6.2 5.1 5.7 6.3 5.8 7.1 6.3 6.5 7.6 4.9 7.3 6.7 7.2 6.5 6.4
-[113] 6.8 5.7 5.8 6.4 6.5 7.7 7.7 6.0 6.9 5.6 7.7 6.3 6.7 7.2 6.2 6.1
-[129] 6.4 7.2 7.4 7.9 6.4 6.3 6.1 7.7 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8
-[145] 6.7 6.7 6.3 6.5 6.2 5.9</code></pre>
+<pre><code>  [1] 5.1 4.9 4.7 4.6 5.0 5.4 4.6 5.0 4.4 4.9 5.4 4.8 4.8 4.3 5.8
+ [16] 5.7 5.4 5.1 5.7 5.1 5.4 5.1 4.6 5.1 4.8 5.0 5.0 5.2 5.2 4.7
+ [31] 4.8 5.4 5.2 5.5 4.9 5.0 5.5 4.9 4.4 5.1 5.0 4.5 4.4 5.0 5.1
+ [46] 4.8 5.1 4.6 5.3 5.0 7.0 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2
+ [61] 5.0 5.9 6.0 6.1 5.6 6.7 5.6 5.8 6.2 5.6 5.9 6.1 6.3 6.1 6.4
+ [76] 6.6 6.8 6.7 6.0 5.7 5.5 5.5 5.8 6.0 5.4 6.0 6.7 6.3 5.6 5.5
+ [91] 5.5 6.1 5.8 5.0 5.6 5.7 5.7 6.2 5.1 5.7 6.3 5.8 7.1 6.3 6.5
+[106] 7.6 4.9 7.3 6.7 7.2 6.5 6.4 6.8 5.7 5.8 6.4 6.5 7.7 7.7 6.0
+[121] 6.9 5.6 7.7 6.3 6.7 7.2 6.2 6.1 6.4 7.2 7.4 7.9 6.4 6.3 6.1
+[136] 7.7 6.3 6.4 6.0 6.9 6.7 6.9 5.8 6.8 6.7 6.7 6.3 6.5 6.2 5.9</code></pre>
 <p>Selecting a range of lines works, as the lines (or records) in a data
 frame are numbered:</p>
 <pre class="r"><code>&gt; iris[50:54,]</code></pre>
@@ -1144,7 +1155,7 @@ frame:</p>
 &gt; cbind(my_column, iris) -&gt; iris2
 &gt; str(iris2)</code></pre>
 <pre><code>&#39;data.frame&#39;:   150 obs. of  6 variables:
- $ my_column   : num  94204 15936 18152 47060 40244 ...
+ $ my_column   : num  78776 9591 87667 5537 71763 ...
  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
@@ -1165,18 +1176,18 @@ dataframe made of numeric values:</p>
 &gt; av6=names(which.max(table(iris2[,6]))) # # to get the most common category in this factor
 &gt; rbind(iris2,c(av1,av2,av3,av4,av5,av6)) -&gt; iris3
 &gt; tail(iris3, n=2)</code></pre>
-<pre><code>          ID     Sepal.Length      Sepal.Width Petal.Length
-150    85774              5.9                3          5.1
-151 47888.72 5.84333333333333 3.05733333333333        3.758
-         Petal.Width   Species
-150              1.8 virginica
-151 1.19933333333333    setosa</code></pre>
+<pre><code>                  ID     Sepal.Length      Sepal.Width
+150            52050              5.9                3
+151 49813.6066666667 5.84333333333333 3.05733333333333
+    Petal.Length      Petal.Width   Species
+150          5.1              1.8 virginica
+151        3.758 1.19933333333333    setosa</code></pre>
 <p>So it seems that we are fine: the line containing the average values
 of all the columns has been added at the bottom of the dataframe. But
 let’s look at the structure of our new <code>iris3</code> variable:</p>
 <pre class="r"><code>&gt; str(iris3)</code></pre>
 <pre><code>&#39;data.frame&#39;:   151 obs. of  6 variables:
- $ ID          : chr  &quot;94204&quot; &quot;15936&quot; &quot;18152&quot; &quot;47060&quot; ...
+ $ ID          : chr  &quot;78776&quot; &quot;9591&quot; &quot;87667&quot; &quot;5537&quot; ...
  $ Sepal.Length: chr  &quot;5.1&quot; &quot;4.9&quot; &quot;4.7&quot; &quot;4.6&quot; ...
  $ Sepal.Width : chr  &quot;3.5&quot; &quot;3&quot; &quot;3.2&quot; &quot;3.1&quot; ...
  $ Petal.Length: chr  &quot;1.4&quot; &quot;1.4&quot; &quot;1.3&quot; &quot;1.5&quot; ...
@@ -1198,10 +1209,10 @@ lots of basic objects accept conversion to strings by means of the
 <pre class="r"><code>&gt; mode(av6)</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>
 <pre class="r"><code>&gt; av1</code></pre>
-<pre><code>[1] 47888.72</code></pre>
+<pre><code>[1] 49813.61</code></pre>
 <pre class="r"><code>&gt; c(av1,av2,av3,av4,av5,av6) -&gt; last_row
 &gt; last_row</code></pre>
-<pre><code>[1] &quot;47888.72&quot;         &quot;5.84333333333333&quot; &quot;3.05733333333333&quot;
+<pre><code>[1] &quot;49813.6066666667&quot; &quot;5.84333333333333&quot; &quot;3.05733333333333&quot;
 [4] &quot;3.758&quot;            &quot;1.19933333333333&quot; &quot;setosa&quot;          </code></pre>
 <pre class="r"><code>&gt; mode(last_row)</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>

@@ -18,6 +18,8 @@ navbar:
           href: script_day1_am.R
         - text: "Tuesday afternoon"
           href: script_day1_pm.R
+        - text: "Whiteboard scribblings Tuesday"
+          href: whiteboard_scribblings_Tuesday.pdf
     - text: "Sample datasets"
       menu:
         - text: "fev_dataset.txt"
