@@ -12,6 +12,12 @@ navbar:
     - text: "Exploring a dataset with tidyverse"
       href: playing-tidyverse.html
   right:
+    - text: "Training workshop scripts"
+      menu:
+        - text: "Tuesday morning"
+          href: script_day1_am.R
+        - text: "Tuesday afternoon"
+          href: script_day1_pm.R
     - text: "Sample datasets"
       menu:
         - text: "fev_dataset.txt"
