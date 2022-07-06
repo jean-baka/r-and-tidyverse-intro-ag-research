@@ -260,7 +260,7 @@ $(document).ready(function () {
   <a href="playing-tidyverse.html">Exploring a dataset with tidyverse</a>
 </li>
 <li>
-  <a href="Univariable\ Stats.pdf">Univariate stats</a>
+  <a href="Univariable%20Stats.pdf">Univariate stats</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -433,9 +433,18 @@ or “environment”: it returns a vector populated with strings giving the
 names of these objects present in your current R environment (i.e. the
 variables you defined earlier in your interactive session).</p>
 <pre class="r"><code>&gt; ls()</code></pre>
-<pre><code>[1] &quot;a&quot;                  &quot;b&quot;                  &quot;cs_aged_50&quot;        
-[4] &quot;hh_aged_50&quot;         &quot;households&quot;         &quot;livestock_with_IDs&quot;
-[7] &quot;livestockTLU&quot;       &quot;myvec&quot;              &quot;no_age_greater_70&quot; </code></pre>
+<pre><code> [1] &quot;a&quot;                  &quot;av1&quot;                &quot;av2&quot;               
+ [4] &quot;av3&quot;                &quot;av4&quot;                &quot;av5&quot;               
+ [7] &quot;av6&quot;                &quot;b&quot;                  &quot;blood_groups&quot;      
+[10] &quot;cs_aged_50&quot;         &quot;dat1&quot;               &quot;filter&quot;            
+[13] &quot;hh_aged_50&quot;         &quot;households&quot;         &quot;iris2&quot;             
+[16] &quot;iris3&quot;              &quot;last_row&quot;           &quot;list1&quot;             
+[19] &quot;list2&quot;              &quot;livestock_with_IDs&quot; &quot;livestockTLU&quot;      
+[22] &quot;mat1&quot;               &quot;mat2&quot;               &quot;mat3&quot;              
+[25] &quot;mat4&quot;               &quot;mat5&quot;               &quot;my_column&quot;         
+[28] &quot;mydat&quot;              &quot;mydir&quot;              &quot;myvec&quot;             
+[31] &quot;no_age_greater_70&quot;  &quot;oldnames&quot;           &quot;responses&quot;         
+[34] &quot;subset1&quot;            &quot;transformed&quot;        &quot;vec&quot;               </code></pre>
 <p>Beware!! If you omit the parentheses, R will try and evaluate
 <strong>the function itself</strong>:</p>
 <pre class="r"><code>&gt; ls</code></pre>
@@ -1143,7 +1152,7 @@ frame:</p>
 &gt; cbind(my_column, iris) -&gt; iris2
 &gt; str(iris2)</code></pre>
 <pre><code>&#39;data.frame&#39;:   150 obs. of  6 variables:
- $ my_column   : num  28163 83826 42656 76233 70940 ...
+ $ my_column   : num  51954 97686 21033 40948 10374 ...
  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
@@ -1164,18 +1173,18 @@ dataframe made of numeric values:</p>
 &gt; av6=names(which.max(table(iris2[,6]))) # # to get the most common category in this factor
 &gt; rbind(iris2,c(av1,av2,av3,av4,av5,av6)) -&gt; iris3
 &gt; tail(iris3, n=2)</code></pre>
-<pre><code>                  ID     Sepal.Length      Sepal.Width Petal.Length
-150            96847              5.9                3          5.1
-151 50411.3866666667 5.84333333333333 3.05733333333333        3.758
-         Petal.Width   Species
-150              1.8 virginica
-151 1.19933333333333    setosa</code></pre>
+<pre><code>       ID     Sepal.Length      Sepal.Width Petal.Length      Petal.Width
+150 53525              5.9                3          5.1              1.8
+151 49855 5.84333333333333 3.05733333333333        3.758 1.19933333333333
+      Species
+150 virginica
+151    setosa</code></pre>
 <p>So it seems that we are fine: the line containing the average values
 of all the columns has been added at the bottom of the dataframe. But
 let’s look at the structure of our new <code>iris3</code> variable:</p>
 <pre class="r"><code>&gt; str(iris3)</code></pre>
 <pre><code>&#39;data.frame&#39;:   151 obs. of  6 variables:
- $ ID          : chr  &quot;28163&quot; &quot;83826&quot; &quot;42656&quot; &quot;76233&quot; ...
+ $ ID          : chr  &quot;51954&quot; &quot;97686&quot; &quot;21033&quot; &quot;40948&quot; ...
  $ Sepal.Length: chr  &quot;5.1&quot; &quot;4.9&quot; &quot;4.7&quot; &quot;4.6&quot; ...
  $ Sepal.Width : chr  &quot;3.5&quot; &quot;3&quot; &quot;3.2&quot; &quot;3.1&quot; ...
  $ Petal.Length: chr  &quot;1.4&quot; &quot;1.4&quot; &quot;1.3&quot; &quot;1.5&quot; ...
@@ -1197,10 +1206,10 @@ lots of basic objects accept conversion to strings by means of the
 <pre class="r"><code>&gt; mode(av6)</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>
 <pre class="r"><code>&gt; av1</code></pre>
-<pre><code>[1] 50411.39</code></pre>
+<pre><code>[1] 49855</code></pre>
 <pre class="r"><code>&gt; c(av1,av2,av3,av4,av5,av6) -&gt; last_row
 &gt; last_row</code></pre>
-<pre><code>[1] &quot;50411.3866666667&quot; &quot;5.84333333333333&quot; &quot;3.05733333333333&quot;
+<pre><code>[1] &quot;49855&quot;            &quot;5.84333333333333&quot; &quot;3.05733333333333&quot;
 [4] &quot;3.758&quot;            &quot;1.19933333333333&quot; &quot;setosa&quot;          </code></pre>
 <pre class="r"><code>&gt; mode(last_row)</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>

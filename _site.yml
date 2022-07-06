@@ -12,7 +12,7 @@ navbar:
     - text: "Exploring a dataset with tidyverse"
       href: playing-tidyverse.html
     - text: "Univariate stats"
-      href: Univariable\ Stats.pdf
+      href: Univariable%20Stats.pdf
   right:
     - text: "Training workshop scripts"
       menu:
