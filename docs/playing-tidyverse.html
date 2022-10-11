@@ -265,7 +265,22 @@ $(document).ready(function () {
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Training workshop scripts
+    ADD workshop scripts
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Addis_day1_am.R">Day 1 morning</a>
+    </li>
+    <li>
+      <a href="Addis_day1_pm.R">Day 1 afternoon</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    NBO workshop scripts
      
     <span class="caret"></span>
   </a>
@@ -323,7 +338,7 @@ $(document).ready(function () {
 <h1 class="title toc-ignore">First steps with the tidyverse
 collection</h1>
 <h4 class="author">Jean-Baka Domelevo Entfellner</h4>
-<h4 class="date">Last updated on 06 July, 2022</h4>
+<h4 class="date">Last updated on 11 October, 2022</h4>
 
 </div>
 
@@ -434,9 +449,8 @@ function from the <code>readxl</code> package:</p>
  9 BUN09 Western        0         1     1    35        10            10
 10 BUN10 Western        0         1     1    40        12            14
 # … with 517 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
-#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;,
-#   off_farm_act &lt;dbl&gt;, offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;,
-#   off_farm_percent &lt;dbl&gt;</code></pre>
+#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
+#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
 <pre class="r"><code>&gt; library(readxl)
 &gt; read_xlsx(&quot;livestock_data.xlsx&quot;, sheet = 2) -&gt; households # works fine</code></pre>
 </div>
@@ -490,9 +504,8 @@ however many, are displayed):</p>
  9 BUN09 Western        0         1     1    35        10            10
 10 BUN10 Western        0         1     1    40        12            14
 # … with 517 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
-#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;,
-#   off_farm_act &lt;dbl&gt;, offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;,
-#   off_farm_percent &lt;dbl&gt;</code></pre>
+#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
+#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
 <p>You can see the display fits the width of your screen, only the first
 10 rows are displayed, and the additional variables (columns are hidden
 and summarised at the bottom in grey characters).</p>
@@ -596,9 +609,8 @@ households with at least 10 years of farming experience:</p>
  9 BUN105 Western        1         1     1    50        12            25
 10 BUN106 Western        1         1     1    30         8            10
 # … with 329 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
-#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;,
-#   off_farm_act &lt;dbl&gt;, offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;,
-#   off_farm_percent &lt;dbl&gt;</code></pre>
+#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
+#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
 <p>(please note an advantage of using the pipe versus the equivalent
 syntax <code>filter(households, hh_experience &gt;=10)</code>: RStudio
 autocompletes for you the variable name when you are midway typing
@@ -623,9 +635,8 @@ the the households with at least 10 years of farming experience
  9 KIA121116 Kiambu         1         1     0    34        11            15
 10 KIA121814 Kiambu         1         1     1    50        11            21
 # … with 11 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
-#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;,
-#   off_farm_act &lt;dbl&gt;, offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;,
-#   off_farm_percent &lt;dbl&gt;</code></pre>
+#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
+#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
 <p>Only 21 observations remaining.</p>
 </div>
 
