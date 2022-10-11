@@ -14,7 +14,13 @@ navbar:
     - text: "Univariate stats"
       href: Univariable%20Stats.pdf
   right:
-    - text: "Training workshop scripts"
+    - text: "ADD workshop scripts"
+      menu:
+        - text: "Day 1 morning"
+          href: Addis_day1_am.R
+        - text: "Day 1 afternoon"
+          href: Addis_day1_pm.R
+    - text: "NBO workshop scripts"
       menu:
         - text: "Day 1 morning"
           href: script_day1_am.R
