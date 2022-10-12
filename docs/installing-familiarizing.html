@@ -280,6 +280,18 @@ $(document).ready(function () {
     <li>
       <a href="Addis_day2_am.R">Day 2 morning</a>
     </li>
+    <li>
+      <a href="Addis_day2_pm.R">Day 2 afternoon</a>
+    </li>
+    <li>
+      <a href="imputing_on_missing_values.R">Replacing NAs</a>
+    </li>
+    <li>
+      <a href="AddisPM-BlockDesignExple.R">Block design analysis</a>
+    </li>
+    <li>
+      <a href="boxplots.R">Boxplots compared</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -342,7 +354,8 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Installing R &amp; RStudio, and getting familiar with the interface</h1>
+<h1 class="title toc-ignore">Installing R &amp; RStudio, and getting
+familiar with the interface</h1>
 <h4 class="author">Jean-Baka Domelevo Entfellner</h4>
 <h4 class="date">2022-07-01</h4>
 
@@ -351,45 +364,162 @@ $(document).ready(function () {
 
 <div id="naming-the-beasts" class="section level2">
 <h2>Naming the beasts</h2>
-<p>R (yes, the letter “R”) is a <strong>programming language</strong> that derives from another, older programming language with a bias for statistics, that was called S (yes, the letter “S”). R’s primary website is called <a href="https://www.r-project.org/">The R Project for Statistical Computing</a> and the software with all its dependencies is primarily stored in a network of servers called <a href="https://cran.r-project.org/">the Comprehensive R Archive Network (CRAN)</a>, with <a href="https://cran.r-project.org/mirrors.html">mirroring servers</a> all around the world.</p>
-<p>It is good to recognize “founding fathers”, so let’s say here that the original developers of R are Robert Gentleman and Ross Ihaka, from the stats department of the university of Auckland, New Zealand. John Chambers was the principal developer of S, and jumped onboard the R core developer team soon into R’s history. You will see his name at the bottom of many help pages for R commands.</p>
-<p>R is now a whole ecosystem whose core is a <a href="https://www.gnu.org/software/software.en.html">GNU project</a>. At the time of writing this (beginning of July 2022), the latest release of R is codenamed “Funny-Looking Kid” and bears version number 4.2.1.</p>
-<p><a href="https://www.rstudio.com/products/rstudio/">RStudio</a> is an Integrated Development Environment (IDE) that enables its users to write and execute R code in a friendly way through a graphical user interface (GUI). RStudio is developed by a Boston-based company bearing the same name, which develops open-source software but also commercial data analysis solutions. RStudio is a strong driver of the R ecosystem, with a guy named Hadley Wickham (you will hear a lot about him when it comes to the <em>tidyverse</em> set of libraries, a kind of “R 2.0” on its own) as its chief scientist. You can learn more about RStudio and its hybrid “public-good” and “for-profit” model on <a href="https://www.rstudio.com/about/">their “about” page</a>. RStudio <strong>is not</strong> R, but that’s such a nice programming environment to use that almost all current R users have adopted it as their favorite (disclaimer: personal opinion here!).</p>
-<p>In order to use R conveniently on one’s own computer, one has to install R and RStudio. Those two pieces of software are fully cross-platform, which means you will be able to install them irrespective of the operating system you are using: R &amp; RStudio are for Microsoft Windows, Apple macOS or GNU/Linux (any distro).</p>
+<p>R (yes, the letter “R”) is a <strong>programming language</strong>
+that derives from another, older programming language with a bias for
+statistics, that was called S (yes, the letter “S”). R’s primary website
+is called <a href="https://www.r-project.org/">The R Project for
+Statistical Computing</a> and the software with all its dependencies is
+primarily stored in a network of servers called <a
+href="https://cran.r-project.org/">the Comprehensive R Archive Network
+(CRAN)</a>, with <a
+href="https://cran.r-project.org/mirrors.html">mirroring servers</a> all
+around the world.</p>
+<p>It is good to recognize “founding fathers”, so let’s say here that
+the original developers of R are Robert Gentleman and Ross Ihaka, from
+the stats department of the university of Auckland, New Zealand. John
+Chambers was the principal developer of S, and jumped onboard the R core
+developer team soon into R’s history. You will see his name at the
+bottom of many help pages for R commands.</p>
+<p>R is now a whole ecosystem whose core is a <a
+href="https://www.gnu.org/software/software.en.html">GNU project</a>. At
+the time of writing this (beginning of July 2022), the latest release of
+R is codenamed “Funny-Looking Kid” and bears version number 4.2.1.</p>
+<p><a href="https://www.rstudio.com/products/rstudio/">RStudio</a> is an
+Integrated Development Environment (IDE) that enables its users to write
+and execute R code in a friendly way through a graphical user interface
+(GUI). RStudio is developed by a Boston-based company bearing the same
+name, which develops open-source software but also commercial data
+analysis solutions. RStudio is a strong driver of the R ecosystem, with
+a guy named Hadley Wickham (you will hear a lot about him when it comes
+to the <em>tidyverse</em> set of libraries, a kind of “R 2.0” on its
+own) as its chief scientist. You can learn more about RStudio and its
+hybrid “public-good” and “for-profit” model on <a
+href="https://www.rstudio.com/about/">their “about” page</a>. RStudio
+<strong>is not</strong> R, but that’s such a nice programming
+environment to use that almost all current R users have adopted it as
+their favorite (disclaimer: personal opinion here!).</p>
+<p>In order to use R conveniently on one’s own computer, one has to
+install R and RStudio. Those two pieces of software are fully
+cross-platform, which means you will be able to install them
+irrespective of the operating system you are using: R &amp; RStudio are
+for Microsoft Windows, Apple macOS or GNU/Linux (any distro).</p>
 </div>
 <div id="installing-r-on-your-own-computer" class="section level2">
 <h2>Installing R on your own computer</h2>
-<p>The first step you have to perform is therefore to install the R environment on your computer. This will enable you to execute R programs. By so doing, you will actually be installing an <em>R interpreter</em>. Proceed through the <a href="https://cran.r-project.org/">CRAN master website</a> or any of the CRAN mirror sites (e.g. <a href="https://cran.mirror.ac.za/" class="uri">https://cran.mirror.ac.za/</a> for the CRAN mirror in South Africa) and download the R software package corresponding to your computer’s operating system. You will usually want to download and install a precompiled binary distribution of R, so click the appropriate link in the first frame on the page, as shown below.</p>
+<p>The first step you have to perform is therefore to install the R
+environment on your computer. This will enable you to execute R
+programs. By so doing, you will actually be installing an <em>R
+interpreter</em>. Proceed through the <a
+href="https://cran.r-project.org/">CRAN master website</a> or any of the
+CRAN mirror sites (e.g. <a href="https://cran.mirror.ac.za/"
+class="uri">https://cran.mirror.ac.za/</a> for the CRAN mirror in South
+Africa) and download the R software package corresponding to your
+computer’s operating system. You will usually want to download and
+install a precompiled binary distribution of R, so click the appropriate
+link in the first frame on the page, as shown below.</p>
 <div class="figure">
 <img src="Figs/install_R_CRAN.png" alt="" />
-<p class="caption">Downloading and installing R from the CRAN website</p>
+<p class="caption">Downloading and installing R from the CRAN
+website</p>
 </div>
-<p>Just install the base R package, there is no need at this stage for you to install any set of contributed packages (“add-ons”, in a way). Please follow the links and read the instructions. On Windows, you will probably download one executable installer file like <a href="https://cran.r-project.org/bin/windows/base/R-4.2.1-win.exe">this one for R version 4.2.1</a>, while on GNU/Linux you will be able to install R via your distro’s favorite software package manager (e.g. install <code>r-base</code> and <code>r-base-dev</code> on <em>apt</em>-based distributions, <code>R-core</code> and <code>R-core-devel</code> on <em>yum</em>-based distributions, etc).</p>
+<p>Just install the base R package, there is no need at this stage for
+you to install any set of contributed packages (“add-ons”, in a way).
+Please follow the links and read the instructions. On Windows, you will
+probably download one executable installer file like <a
+href="https://cran.r-project.org/bin/windows/base/R-4.2.1-win.exe">this
+one for R version 4.2.1</a>, while on GNU/Linux you will be able to
+install R via your distro’s favorite software package manager
+(e.g. install <code>r-base</code> and <code>r-base-dev</code> on
+<em>apt</em>-based distributions, <code>R-core</code> and
+<code>R-core-devel</code> on <em>yum</em>-based distributions, etc).</p>
 </div>
-<div id="installing-rstudio-on-your-own-computer" class="section level2">
+<div id="installing-rstudio-on-your-own-computer"
+class="section level2">
 <h2>Installing RStudio on your own computer</h2>
-<p>Next, you have to proceed with installing RStudio. As we are installing on our own computer, we pick the free RStudio Desktop available on <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio’s download page</a>. Again, here: follow the instructions pertaining to your own operating system. You will likely find a precompiled binary version for your own OS, to install and run straight out of the box (see below).</p>
+<p>Next, you have to proceed with installing RStudio. As we are
+installing on our own computer, we pick the free RStudio Desktop
+available on <a
+href="https://www.rstudio.com/products/rstudio/download/#download">RStudio’s
+download page</a>. Again, here: follow the instructions pertaining to
+your own operating system. You will likely find a precompiled binary
+version for your own OS, to install and run straight out of the box (see
+below).</p>
 <div class="figure">
 <img src="Figs/install_RStudio.png" alt="" />
-<p class="caption">Downloading and installing RStudio Desktop using a pre-compiled installer (showing latest version 2022.02.3+492 as of 01/07/2022)</p>
+<p class="caption">Downloading and installing RStudio Desktop using a
+pre-compiled installer (showing latest version 2022.02.3+492 as of
+01/07/2022)</p>
 </div>
 </div>
-<div id="getting-familiar-with-rstudios-interface" class="section level2">
+<div id="getting-familiar-with-rstudios-interface"
+class="section level2">
 <h2>Getting familiar with RStudio’s interface</h2>
-<p>If you’re running some GNU/Linux system, you can interact with the R interpreter right by firing <code>R</code> on the commandline, and run already written R scripts through the <code>Rscript</code> command. Fine, but that is not the usual route people will pick: therefore, in the remaining, we will assume we are running RStudio Desktop’s graphical user interface, irrespective of one’s operating system.</p>
-<p>Once you have installed R and RStudio (see above), you are ready to launch the RStudio environment. Once open, the RStudio window will look like that, with the four standard panes displayed:</p>
+<p>If you’re running some GNU/Linux system, you can interact with the R
+interpreter right by firing <code>R</code> on the commandline, and run
+already written R scripts through the <code>Rscript</code> command.
+Fine, but that is not the usual route people will pick: therefore, in
+the remaining, we will assume we are running RStudio Desktop’s graphical
+user interface, irrespective of one’s operating system.</p>
+<p>Once you have installed R and RStudio (see above), you are ready to
+launch the RStudio environment. Once open, the RStudio window will look
+like that, with the four standard panes displayed:</p>
 <div class="figure">
 <img src="Figs/rstudio_master_view.png" alt="" />
-<p class="caption">RStudio’s window with its four panes (taken from the excellent <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf">RStudio IDE cheatsheet</a>, CC BY SA Rstudio®)</p>
+<p class="caption">RStudio’s window with its four panes (taken from the
+excellent <a
+href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf">RStudio
+IDE cheatsheet</a>, CC BY SA Rstudio®)</p>
 </div>
-<p>The four standard panes (or “sub-windows”) of RStudio are traditionally organized as follows. You may want, while working with RStudio, to hide or minimize some of them (see the icons on the top right of each pane, or the “Workspace Panes” toolbar item that looks like a window with a 2x2 grid at the top of the above screenshot). Anticlockwise from top left, we have:</p>
+<p>The four standard panes (or “sub-windows”) of RStudio are
+traditionally organized as follows. You may want, while working with
+RStudio, to hide or minimize some of them (see the icons on the top
+right of each pane, or the “Workspace Panes” toolbar item that looks
+like a window with a 2x2 grid at the top of the above screenshot).
+Anticlockwise from top left, we have:</p>
 <ol style="list-style-type: decimal">
-<li>the <strong>source editor</strong> pane. That is where you type code that you will save in a file, to edit, enrich and reuse later on. To execute the line your cursor is currently on, hit <code>Ctrl</code>+<code>Enter</code> while in the source editor pane. Only typing <code>Enter</code> while in this pane just adds a blank line to your current file and moves the cursor there.</li>
-<li>the <strong>console</strong> pane. This is the space for direct interactions with the R interpreter: you type something in there, and R “answers” after interpreting what you typed into R language. That is also where you will see those R error messages you will get without fail ;). Whenever you execute one or several lines of your current file in the source editor, the results of that execution appear in the console pane. The things you are typing in the console pane are <em>not</em> saved in any file, besides the internal R history of commands.</li>
-<li>the bottom right pane is mostly used for <strong>plots and help pages</strong> (I will continuously use the vocable “manpages” for “help pages”). Depending on your interactions with R, RStudio will automatically switch from one tab to the next in this pane. For instance, if you ask for a manpage, it will be loaded there and the switch from displaying the <code>Help</code> tab instead of the <code>Plots</code> tab (provided that is what was displayed) will take place automatically. The <code>Files</code> tab can be used to display the files in your filesystem, with starting point being your current <em>working directory</em> (more on the story about this “working directory” in the “Intro to R” tutorial )</li>
-<li>the top right pane is most commonly used to display the current variables in your <strong>environment</strong> (<code>Environment</code> tab). When we say “current variables”, we mean <strong>R objects</strong> that are residing in the computer’s volatile memory while you are in the middle of an R session using RStudio. Such variables can be numeric vectors, data frames, etc. More on those in the “Intro to R” tutorial. Within this fourth pane, the <code>History</code> tab enables you to view (and export, if you so wish) the history of the R commands you have entered so far.</li>
+<li>the <strong>source editor</strong> pane. That is where you type code
+that you will save in a file, to edit, enrich and reuse later on. To
+execute the line your cursor is currently on, hit
+<code>Ctrl</code>+<code>Enter</code> while in the source editor pane.
+Only typing <code>Enter</code> while in this pane just adds a blank line
+to your current file and moves the cursor there.</li>
+<li>the <strong>console</strong> pane. This is the space for direct
+interactions with the R interpreter: you type something in there, and R
+“answers” after interpreting what you typed into R language. That is
+also where you will see those R error messages you will get without fail
+;). Whenever you execute one or several lines of your current file in
+the source editor, the results of that execution appear in the console
+pane. The things you are typing in the console pane are <em>not</em>
+saved in any file, besides the internal R history of commands.</li>
+<li>the bottom right pane is mostly used for <strong>plots and help
+pages</strong> (I will continuously use the vocable “manpages” for “help
+pages”). Depending on your interactions with R, RStudio will
+automatically switch from one tab to the next in this pane. For
+instance, if you ask for a manpage, it will be loaded there and the
+switch from displaying the <code>Help</code> tab instead of the
+<code>Plots</code> tab (provided that is what was displayed) will take
+place automatically. The <code>Files</code> tab can be used to display
+the files in your filesystem, with starting point being your current
+<em>working directory</em> (more on the story about this “working
+directory” in the “Intro to R” tutorial )</li>
+<li>the top right pane is most commonly used to display the current
+variables in your <strong>environment</strong> (<code>Environment</code>
+tab). When we say “current variables”, we mean <strong>R
+objects</strong> that are residing in the computer’s volatile memory
+while you are in the middle of an R session using RStudio. Such
+variables can be numeric vectors, data frames, etc. More on those in the
+“Intro to R” tutorial. Within this fourth pane, the <code>History</code>
+tab enables you to view (and export, if you so wish) the history of the
+R commands you have entered so far.</li>
 </ol>
-<p>The decorated screenshot above is taken from RStudio’s excellent <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf">RStudio IDE cheatsheet</a>, forming part of a series of cheatsheets (the rule thereof being to fit as much info in a palatable, nice-looking way, on no more than two landscape-format pdf pages) to be found <a href="https://www.rstudio.com/resources/cheatsheets/">here</a>. I strongly encourage you to download, print and pin as many of those cheatsheets to adorn the walls of your physical workspace. :)</p>
+<p>The decorated screenshot above is taken from RStudio’s excellent <a
+href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rstudio-ide.pdf">RStudio
+IDE cheatsheet</a>, forming part of a series of cheatsheets (the rule
+thereof being to fit as much info in a palatable, nice-looking way, on
+no more than two landscape-format pdf pages) to be found <a
+href="https://www.rstudio.com/resources/cheatsheets/">here</a>. I
+strongly encourage you to download, print and pin as many of those
+cheatsheets to adorn the walls of your physical workspace. :)</p>
 </div>
 
 
