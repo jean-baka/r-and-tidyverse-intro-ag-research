@@ -20,6 +20,8 @@ navbar:
           href: Addis_day1_am.R
         - text: "Day 1 afternoon"
           href: Addis_day1_pm.R
+        - text: "Day 2 morning"
+          href: Addis_day2_am.R
     - text: "NBO workshop scripts"
       menu:
         - text: "Day 1 morning"
