@@ -316,6 +316,9 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="block_design_example.csv">block design example (csv)</a>
+    </li>
+    <li>
       <a href="fev_dataset.txt">fev_dataset.txt</a>
     </li>
     <li>
@@ -338,8 +341,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">First steps with the tidyverse
-collection</h1>
+<h1 class="title toc-ignore">First steps with the tidyverse collection</h1>
 <h4 class="author">Jean-Baka Domelevo Entfellner</h4>
 <h4 class="date">Last updated on 12 October, 2022</h4>
 
@@ -348,74 +350,30 @@ collection</h1>
 
 <div id="introduction-to-r-packages" class="section level1">
 <h1>Introduction to R packages</h1>
-<p>In R, <strong>packages</strong> are software modules providing extra
-functions, operators and datasets. Some packages, like <code>base</code>
-and <code>stats</code>, are part of the core R distribution, which means
-you don’t need to install them separately, and they are already loaded
-in your environment upon starting your R session. When using RStudio, in
-the bottom right pane, you can see the available packages by clicking
-the <code>Packages</code> tab. The ones that are currently loaded in
-your environment appear with a tick mark. For those, you don’t need to
-prepend the package name followed by a double colon when you call a
-function it implements (e.g. you can write <code>str_sub()</code>
-instead of <code>stringr::str_sub()</code> if and only if the
-<code>stringr</code> package is already loaded in your environment).</p>
-<p>In order to load a package, one calls <code>library()</code> with the
-package name as argument. Quoting is unnecessary.</p>
-<p>Before using a package for the first time, you need to download and
-install it on your computer by calling <code>install.packages()</code>
-with the quoted name of the package as argument.</p>
+<p>In R, <strong>packages</strong> are software modules providing extra functions, operators and datasets. Some packages, like <code>base</code> and <code>stats</code>, are part of the core R distribution, which means you don’t need to install them separately, and they are already loaded in your environment upon starting your R session. When using RStudio, in the bottom right pane, you can see the available packages by clicking the <code>Packages</code> tab. The ones that are currently loaded in your environment appear with a tick mark. For those, you don’t need to prepend the package name followed by a double colon when you call a function it implements (e.g. you can write <code>str_sub()</code> instead of <code>stringr::str_sub()</code> if and only if the <code>stringr</code> package is already loaded in your environment).</p>
+<p>In order to load a package, one calls <code>library()</code> with the package name as argument. Quoting is unnecessary.</p>
+<p>Before using a package for the first time, you need to download and install it on your computer by calling <code>install.packages()</code> with the quoted name of the package as argument.</p>
 </div>
-<div id="introduction-to-the-tidyverse-collection"
-class="section level1">
+<div id="introduction-to-the-tidyverse-collection" class="section level1">
 <h1>Introduction to the tidyverse collection</h1>
-<p><a href="https://www.tidyverse.org/">tidyverse</a> is a collection of
-open-source packages for R that were primarily developed by Hadley
-Wickham. Let us list the most common and broadly describe their
-scope:</p>
+<p><a href="https://www.tidyverse.org/">tidyverse</a> is a collection of open-source packages for R that were primarily developed by Hadley Wickham. Let us list the most common and broadly describe their scope:</p>
 <ol style="list-style-type: decimal">
-<li><code>tibble</code> to work with <em>tibbles</em> instead of data
-frames: tibbles are “smart” data containers that display in a smarter
-way, with neater type control, etc.</li>
-<li><code>readr</code> to import tabular data from different text files
-(tab-delimited, csv, fixed-width fields, etc) into tibbles</li>
-<li><code>readxl</code> to import data from Excel files (both .xls and
-.xlsx) into tibbles</li>
-<li><code>tidyr</code> to transform data with different degrees of
-“messiness” into <strong>tidy data</strong>. Tidy data is simple to
-understand, but many datasets you come across are not “tidy”. In tidy
-data, each variable is in its own column, and each observation (a.k.a
-“case” or “individual”) is in its own row. <code>tidyr</code> helps you
-achieve tidy data and reshape datasets by collapsing or splitting
-columns, creating combinations of cases, handling missing values,
-etc</li>
-<li><code>magrittr</code> introduces additional pipe operators like
-<code>%&gt;%</code> and <code>%&lt;&gt;%</code></li>
-<li><code>dplyr</code> is for me <strong>the central package</strong> of
-the tidyverse collection. It’s more than a pair of data pliers: it is a
-whole toolbox to extract information from a dataset, to group,
-summarize, join, apply functions to several variables, etc.</li>
-<li><code>ggplot2</code> implements a whole “grammar of graphics” and
-enables the user to create beautiful graphs of various types
-(scatterplots, histograms, jitter plots, violin plots, scatterplots,
-bargraphs, smoothed curves, 2D-density plots, etc), tweaking the way
-they are displayed through simple commands while maintaining a sense of
-graphical harmony.</li>
-<li><code>stringr</code> enables you to manipulate strings efficiently
-and effortlessly.</li>
-<li><code>purrr</code> is more advanced and deals with functional
-programming : programming by manipulating functions as objects</li>
-<li><code>forcats</code> is a re-implementation of R’s classical factors
-(containers for categorical data).</li>
+<li><code>tibble</code> to work with <em>tibbles</em> instead of data frames: tibbles are “smart” data containers that display in a smarter way, with neater type control, etc.</li>
+<li><code>readr</code> to import tabular data from different text files (tab-delimited, csv, fixed-width fields, etc) into tibbles</li>
+<li><code>readxl</code> to import data from Excel files (both .xls and .xlsx) into tibbles</li>
+<li><code>tidyr</code> to transform data with different degrees of “messiness” into <strong>tidy data</strong>. Tidy data is simple to understand, but many datasets you come across are not “tidy”. In tidy data, each variable is in its own column, and each observation (a.k.a “case” or “individual”) is in its own row. <code>tidyr</code> helps you achieve tidy data and reshape datasets by collapsing or splitting columns, creating combinations of cases, handling missing values, etc</li>
+<li><code>magrittr</code> introduces additional pipe operators like <code>%&gt;%</code> and <code>%&lt;&gt;%</code></li>
+<li><code>dplyr</code> is for me <strong>the central package</strong> of the tidyverse collection. It’s more than a pair of data pliers: it is a whole toolbox to extract information from a dataset, to group, summarize, join, apply functions to several variables, etc.</li>
+<li><code>ggplot2</code> implements a whole “grammar of graphics” and enables the user to create beautiful graphs of various types (scatterplots, histograms, jitter plots, violin plots, scatterplots, bargraphs, smoothed curves, 2D-density plots, etc), tweaking the way they are displayed through simple commands while maintaining a sense of graphical harmony.</li>
+<li><code>stringr</code> enables you to manipulate strings efficiently and effortlessly.</li>
+<li><code>purrr</code> is more advanced and deals with functional programming : programming by manipulating functions as objects</li>
+<li><code>forcats</code> is a re-implementation of R’s classical factors (containers for categorical data).</li>
 </ol>
-<p>All these packages constitute a huge programming effort and a
-considerable contribution to the R ecosystem. I name them a “R 2.0”. In
-order to install all of them at once, one goes:</p>
+<p>All these packages constitute a huge programming effort and a considerable contribution to the R ecosystem. I name them a “R 2.0”. In order to install all of them at once, one goes:</p>
 <pre class="r"><code>&gt; install.packages(&quot;tidyverse&quot;)</code></pre>
 <p>The above can take a little bit of time. Then we go:</p>
 <pre class="r"><code>&gt; library(tidyverse) # you could also load only the packages you want to use among those listed above, issuing one or several calls to library()</code></pre>
-<p>This opens up a whole world of possibilities, that we are going to
-explore in the remaining sections of this tutorial.</p>
+<p>This opens up a whole world of possibilities, that we are going to explore in the remaining sections of this tutorial.</p>
 </div>
 <div id="the-pipe-operator" class="section level1">
 <h1>The pipe operator</h1>
@@ -424,44 +382,22 @@ explore in the remaining sections of this tutorial.</p>
 <pre class="r"><code>&gt; # can be written:
 &gt; 3 %&gt;% sum(7,2)</code></pre>
 <pre><code>[1] 12</code></pre>
-<p>The pipe operator <code>%&gt;%</code> passes what is present on his
-left hand side as the first argument of the function call on its right
-hand side.</p>
+<p>The pipe operator <code>%&gt;%</code> passes what is present on his left hand side as the first argument of the function call on its right hand side.</p>
 <pre class="r"><code>&gt; vec &lt;- c(3,5,NA,7)
 &gt; vec %&gt;% sum(na.rm = TRUE) # same as sum(vec, na.rm = TRUE)</code></pre>
 <pre><code>[1] 15</code></pre>
 </div>
 <div id="reading-from-files-with-readxl" class="section level1">
 <h1>Reading from files with readxl</h1>
-<p>We will import into an R object the content of the sheet called
-“HHcharacteristic” in the file <code>livestock_data.xlsx</code>. That is
-its second sheet. We write a call to the <code>read_xlsx()</code>
-function from the <code>readxl</code> package:</p>
+<p>We will import into an R object the content of the sheet called “HHcharacteristic” in the file <code>livestock_data.xlsx</code>. That is its second sheet. We write a call to the <code>read_xlsx()</code> function from the <code>readxl</code> package:</p>
 <pre class="r"><code>&gt; read_xlsx(&quot;livestock_data.xlsx&quot;, sheet = 2) # fails because readxl is actually not loaded by default when one loads tidyverse, so we go:</code></pre>
-<pre><code># A tibble: 527 × 16
-   qno   survey  anydairy any_agric   sex   age education hh_experience
-   &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
- 1 BUN01 Western        0         1     1    48        12             5
- 2 BUN02 Western        0         1     1    28         8             8
- 3 BUN03 Western        1         1     1    72         4            42
- 4 BUN04 Western        0         1     0    52         0            19
- 5 BUN05 Western        1         1     1    48        12            14
- 6 BUN06 Western        0         1     1    70         4            35
- 7 BUN07 Western        0         1     1    32        12             4
- 8 BUN08 Western        1         1     1    38        12            11
- 9 BUN09 Western        0         1     1    35        10            10
-10 BUN10 Western        0         1     1    40        12            14
-# … with 517 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
-#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;,
-#   off_farm_act &lt;dbl&gt;, offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;,
-#   off_farm_percent &lt;dbl&gt;</code></pre>
+<pre><code>Error in read_xlsx(&quot;livestock_data.xlsx&quot;, sheet = 2): could not find function &quot;read_xlsx&quot;</code></pre>
 <pre class="r"><code>&gt; library(readxl)
 &gt; read_xlsx(&quot;livestock_data.xlsx&quot;, sheet = 2) -&gt; households # works fine</code></pre>
 </div>
 <div id="viewing-a-data-frame-or-tibble" class="section level1">
 <h1>Viewing a data frame or tibble</h1>
-<p>When you want to view the structure of a dataset, you can call the
-fundamental <code>str()</code> function on it:</p>
+<p>When you want to view the structure of a dataset, you can call the fundamental <code>str()</code> function on it:</p>
 <pre class="r"><code>&gt; str(households)</code></pre>
 <pre><code>tibble [527 × 16] (S3: tbl_df/tbl/data.frame)
  $ qno             : chr [1:527] &quot;BUN01&quot; &quot;BUN02&quot; &quot;BUN03&quot; &quot;BUN04&quot; ...
@@ -480,19 +416,8 @@ fundamental <code>str()</code> function on it:</p>
  $ offfarm_activity: num [1:527] 2 2 1 2 1 1 2 2 0 1 ...
  $ interview_date  : POSIXct[1:527], format: &quot;2000-04-25&quot; &quot;2000-04-25&quot; ...
  $ off_farm_percent: num [1:527] 0.5 1 0.2 0.667 0.5 ...</code></pre>
-<p>You can see that the data from the excel file has been imported
-correctly into a tibble (first line of the <code>str()</code> report)
-with 527 rows (observations) and 16 columns (variables). Following that,
-you get a snapshot of each variable (introduced by the <code>$</code>
-character for S3 objects, or the <code>@</code>character for S4
-objects): its type, its length (in a data frame or tibble, all columns
-have the same height, being the number of observations) and its first
-elements (the list that finishes with the three dots).</p>
-<p>Displaying tibbles by simply calling their name is not cumbersome
-(contrary to old-school <code>data.frame</code>s for which long outputs
-are cropped by a not-so-handsome message “[ reached ‘max’ /
-getOption(”max.print”) – omitted xxx rows ]” while all the columns,
-however many, are displayed):</p>
+<p>You can see that the data from the excel file has been imported correctly into a tibble (first line of the <code>str()</code> report) with 527 rows (observations) and 16 columns (variables). Following that, you get a snapshot of each variable (introduced by the <code>$</code> character for S3 objects, or the <code>@</code>character for S4 objects): its type, its length (in a data frame or tibble, all columns have the same height, being the number of observations) and its first elements (the list that finishes with the three dots).</p>
+<p>Displaying tibbles by simply calling their name is not cumbersome (contrary to old-school <code>data.frame</code>s for which long outputs are cropped by a not-so-handsome message “[ reached ‘max’ / getOption("max.print") – omitted xxx rows ]” while all the columns, however many, are displayed):</p>
 <pre class="r"><code>&gt; households</code></pre>
 <pre><code># A tibble: 527 × 16
    qno   survey  anydairy any_agric   sex   age education hh_experience
@@ -508,35 +433,22 @@ however many, are displayed):</p>
  9 BUN09 Western        0         1     1    35        10            10
 10 BUN10 Western        0         1     1    40        12            14
 # … with 517 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
-#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;,
-#   off_farm_act &lt;dbl&gt;, offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;,
-#   off_farm_percent &lt;dbl&gt;</code></pre>
-<p>You can see the display fits the width of your screen, only the first
-10 rows are displayed, and the additional variables (columns are hidden
-and summarised at the bottom in grey characters).</p>
-<p>Finally, in RStudio, you can also use the <code>View()</code>
-function (be careful with the case!) to display a live view of the table
-as an additional tab in the top left (source editor) pane of
-RStudio:</p>
+#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
+#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
+<p>You can see the display fits the width of your screen, only the first 10 rows are displayed, and the additional variables (columns are hidden and summarised at the bottom in grey characters).</p>
+<p>Finally, in RStudio, you can also use the <code>View()</code> function (be careful with the case!) to display a live view of the table as an additional tab in the top left (source editor) pane of RStudio:</p>
 <pre class="r"><code>&gt; View(households)</code></pre>
-<p>This view is not directly editable, but it is live, meaning that in
-case you change the dataset, the changes will reflect in the view.
-Notice you could also get to the same view by clicking on the said
-dataset within the <code>Environment</code> tab of the top right pane in
-RStudio.</p>
+<p>This view is not directly editable, but it is live, meaning that in case you change the dataset, the changes will reflect in the view. Notice you could also get to the same view by clicking on the said dataset within the <code>Environment</code> tab of the top right pane in RStudio.</p>
 </div>
 <div id="simple-summaries-the-old-and-new-way" class="section level1">
 <h1>Simple summaries the old and new way</h1>
-<p>There is a column for sex (I guess, males and females). It is encoded
-as numeric and not as a qualitative variables with two values, so the
-summary with summary() is rather awkward:</p>
+<p>There is a column for sex (I guess, males and females). It is encoded as numeric and not as a qualitative variables with two values, so the summary with summary() is rather awkward:</p>
 <pre class="r"><code>&gt; summary(households$sex)</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
  0.0000  1.0000  1.0000  0.7666  1.0000  1.0000 </code></pre>
 <p>Note that the equivalent to the above but using pipes amounts to:</p>
 <ol style="list-style-type: decimal">
-<li>piping the whole dataset into a function that extracts <em>as a
-vector</em> its <code>sex</code> variable, and then</li>
+<li>piping the whole dataset into a function that extracts <em>as a vector</em> its <code>sex</code> variable, and then</li>
 <li>piping that vector into the <code>summary()</code> function.</li>
 </ol>
 <p>Which is done as below:</p>
@@ -547,16 +459,10 @@ vector</em> its <code>sex</code> variable, and then</li>
 &gt; households %&gt;% `[[`(&quot;sex&quot;) %&gt;% summary() # a tibble is also a data frame, hence a list of variables (columns), and the double-bracket operator extracts as a vector its named element</code></pre>
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
  0.0000  1.0000  1.0000  0.7666  1.0000  1.0000 </code></pre>
-<p>So, the summary is not very informative. With <code>dplyr</code>, the
-<code>summarize</code> operation (you can also write
-<code>summarise</code>, R accepts British English as well as American
-English) is meant to calculate a summary (single value) from one or
-several variables. What we want here is:</p>
+<p>So, the summary is not very informative. With <code>dplyr</code>, the <code>summarize</code> operation (you can also write <code>summarise</code>, R accepts British English as well as American English) is meant to calculate a summary (single value) from one or several variables. What we want here is:</p>
 <ol style="list-style-type: decimal">
-<li>to <em>group</em> the dataset into groups according to the value of
-the “sex” variable</li>
-<li>to display the pairs (value, count of observations) for each of the
-different encodings for the “sex” variable.</li>
+<li>to <em>group</em> the dataset into groups according to the value of the “sex” variable</li>
+<li>to display the pairs (value, count of observations) for each of the different encodings for the “sex” variable.</li>
 </ol>
 <pre class="r"><code>&gt; households %&gt;% group_by(sex) %&gt;% summarize(count = n())</code></pre>
 <pre><code># A tibble: 2 × 2
@@ -564,11 +470,7 @@ different encodings for the “sex” variable.</li>
   &lt;dbl&gt; &lt;int&gt;
 1     0   123
 2     1   404</code></pre>
-<p>See the excellent <a
-href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf">“Data
-transformation with dplyr” cheatsheet</a>. That explains the above,
-which is what I was used to doing until now, but the recent versions of
-dplyr brought something simpler:</p>
+<p>See the excellent <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf">“Data transformation with dplyr” cheatsheet</a>. That explains the above, which is what I was used to doing until now, but the recent versions of dplyr brought something simpler:</p>
 <pre class="r"><code>&gt; households %&gt;% count(sex)</code></pre>
 <pre><code># A tibble: 2 × 2
     sex     n
@@ -584,21 +486,12 @@ dplyr brought something simpler:</p>
 <pre><code>
   0   1 
 123 404 </code></pre>
-<p>But you notice that in both the last two cases (with “the old R”),
-the result appears as a named vector, which is less tidy to work with
-than a true tibble.</p>
+<p>But you notice that in both the last two cases (with “the old R”), the result appears as a named vector, which is less tidy to work with than a true tibble.</p>
 </div>
-<div
-id="filtering-slicing-grouping-data-using-pipes-and-the-power-of-dplyr"
-class="section level1">
-<h1>Filtering, slicing, grouping data: using pipes and the power of
-<code>dplyr</code></h1>
-<p>Let’s see some of the many features offered by the <code>dplyr</code>
-package when it comes to data wrangling.</p>
-<p>We can filter some observations, producing a sub-table (still a
-tibble) containing only the observations matching logical criteria that
-we state. For example, if we want to build a tibble with only the
-households with at least 10 years of farming experience:</p>
+<div id="filtering-slicing-grouping-data-using-pipes-and-the-power-of-dplyr" class="section level1">
+<h1>Filtering, slicing, grouping data: using pipes and the power of <code>dplyr</code></h1>
+<p>Let’s see some of the many features offered by the <code>dplyr</code> package when it comes to data wrangling.</p>
+<p>We can filter some observations, producing a sub-table (still a tibble) containing only the observations matching logical criteria that we state. For example, if we want to build a tibble with only the households with at least 10 years of farming experience:</p>
 <pre class="r"><code>&gt; households %&gt;% filter(hh_experience &gt;= 10) # 339 observations</code></pre>
 <pre><code># A tibble: 339 × 16
    qno    survey  anydairy any_agric   sex   age education hh_experience
@@ -614,18 +507,10 @@ households with at least 10 years of farming experience:</p>
  9 BUN105 Western        1         1     1    50        12            25
 10 BUN106 Western        1         1     1    30         8            10
 # … with 329 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
-#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;,
-#   off_farm_act &lt;dbl&gt;, offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;,
-#   off_farm_percent &lt;dbl&gt;</code></pre>
-<p>(please note an advantage of using the pipe versus the equivalent
-syntax <code>filter(households, hh_experience &gt;=10)</code>: RStudio
-autocompletes for you the variable name when you are midway typing
-<code>hh_experience</code> and you hit the <code>Tab</code> key)</p>
-<p>You can also filter the dataset based on a series of requirements,
-all to be fulfilled simultaneously (logical AND). Just make them several
-arguments to your call to <code>filter</code>. For instance, to select
-the the households with at least 10 years of farming experience
-<strong>and</strong> where the main person is a civil servant:</p>
+#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
+#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
+<p>(please note an advantage of using the pipe versus the equivalent syntax <code>filter(households, hh_experience &gt;=10)</code>: RStudio autocompletes for you the variable name when you are midway typing <code>hh_experience</code> and you hit the <code>Tab</code> key)</p>
+<p>You can also filter the dataset based on a series of requirements, all to be fulfilled simultaneously (logical AND). Just make them several arguments to your call to <code>filter</code>. For instance, to select the the households with at least 10 years of farming experience <strong>and</strong> where the main person is a civil servant:</p>
 <pre class="r"><code>&gt; households %&gt;% filter(hh_experience &gt;= 10, primary_activity == &quot;Civil servant&quot;)</code></pre>
 <pre><code># A tibble: 21 × 16
    qno       survey  anydairy any_agric   sex   age education hh_experience
@@ -641,9 +526,8 @@ the the households with at least 10 years of farming experience
  9 KIA121116 Kiambu         1         1     0    34        11            15
 10 KIA121814 Kiambu         1         1     1    50        11            21
 # … with 11 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
-#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;,
-#   off_farm_act &lt;dbl&gt;, offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;,
-#   off_farm_percent &lt;dbl&gt;</code></pre>
+#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
+#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
 <p>Only 21 observations remaining.</p>
 </div>
 

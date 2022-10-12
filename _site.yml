@@ -38,6 +38,8 @@ navbar:
           href: script_day2_pm_JB.R
     - text: "Sample datasets"
       menu:
+        - text: "block design example (csv)"
+          href: block_design_example.csv
         - text: "fev_dataset.txt"
           href: fev_dataset.txt
         - text: "livestockTLU.csv"
