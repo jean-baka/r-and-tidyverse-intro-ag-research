@@ -14,8 +14,8 @@
 
 <title>First steps with the tidyverse collection</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.1/jquery-3.6.1.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -142,11 +142,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -175,8 +179,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -184,16 +188,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -264,6 +261,18 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    ADD 2024 workshop scripts
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ADD2024_day1_am.R">Day 1 morning</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     ADD workshop scripts
      
@@ -356,7 +365,7 @@ $(document).ready(function () {
 <h1 class="title toc-ignore">First steps with the tidyverse
 collection</h1>
 <h4 class="author">Jean-Baka Domelevo Entfellner</h4>
-<h4 class="date">Last updated on 12 October, 2022</h4>
+<h4 class="date">Last updated on 27 August, 2024</h4>
 
 </div>
 
@@ -453,22 +462,7 @@ hand side.</p>
 its second sheet. We write a call to the <code>read_xlsx()</code>
 function from the <code>readxl</code> package:</p>
 <pre class="r"><code>&gt; read_xlsx(&quot;livestock_data.xlsx&quot;, sheet = 2) # fails because readxl is actually not loaded by default when one loads tidyverse, so we go:</code></pre>
-<pre><code># A tibble: 527 × 16
-   qno   survey  anydairy any_agric   sex   age education hh_experience
-   &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
- 1 BUN01 Western        0         1     1    48        12             5
- 2 BUN02 Western        0         1     1    28         8             8
- 3 BUN03 Western        1         1     1    72         4            42
- 4 BUN04 Western        0         1     0    52         0            19
- 5 BUN05 Western        1         1     1    48        12            14
- 6 BUN06 Western        0         1     1    70         4            35
- 7 BUN07 Western        0         1     1    32        12             4
- 8 BUN08 Western        1         1     1    38        12            11
- 9 BUN09 Western        0         1     1    35        10            10
-10 BUN10 Western        0         1     1    40        12            14
-# … with 517 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
-#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
-#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
+<pre><code>Error in read_xlsx(&quot;livestock_data.xlsx&quot;, sheet = 2): could not find function &quot;read_xlsx&quot;</code></pre>
 <pre class="r"><code>&gt; library(readxl)
 &gt; read_xlsx(&quot;livestock_data.xlsx&quot;, sheet = 2) -&gt; households # works fine</code></pre>
 </div>
@@ -521,9 +515,10 @@ however many, are displayed):</p>
  8 BUN08 Western        1         1     1    38        12            11
  9 BUN09 Western        0         1     1    35        10            10
 10 BUN10 Western        0         1     1    40        12            14
-# … with 517 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
-#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
-#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
+# ℹ 517 more rows
+# ℹ 8 more variables: primary_activity &lt;chr&gt;, adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;,
+#   depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;, offfarm_activity &lt;dbl&gt;,
+#   interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
 <p>You can see the display fits the width of your screen, only the first
 10 rows are displayed, and the additional variables (columns are hidden
 and summarised at the bottom in grey characters).</p>
@@ -626,9 +621,10 @@ households with at least 10 years of farming experience:</p>
  8 BUN103 Western        1         1     0    54         4            38
  9 BUN105 Western        1         1     1    50        12            25
 10 BUN106 Western        1         1     1    30         8            10
-# … with 329 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
-#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
-#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
+# ℹ 329 more rows
+# ℹ 8 more variables: primary_activity &lt;chr&gt;, adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;,
+#   depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;, offfarm_activity &lt;dbl&gt;,
+#   interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
 <p>(please note an advantage of using the pipe versus the equivalent
 syntax <code>filter(households, hh_experience &gt;=10)</code>: RStudio
 autocompletes for you the variable name when you are midway typing
@@ -652,9 +648,10 @@ the the households with at least 10 years of farming experience
  8 KIA121113 Kiambu         1         1     1    37        15            10
  9 KIA121116 Kiambu         1         1     0    34        11            15
 10 KIA121814 Kiambu         1         1     1    50        11            21
-# … with 11 more rows, and 8 more variables: primary_activity &lt;chr&gt;,
-#   adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;, depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;,
-#   offfarm_activity &lt;dbl&gt;, interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
+# ℹ 11 more rows
+# ℹ 8 more variables: primary_activity &lt;chr&gt;, adults &lt;dbl&gt;, fem_totadult &lt;dbl&gt;,
+#   depend_ratio &lt;dbl&gt;, off_farm_act &lt;dbl&gt;, offfarm_activity &lt;dbl&gt;,
+#   interview_date &lt;dttm&gt;, off_farm_percent &lt;dbl&gt;</code></pre>
 <p>Only 21 observations remaining.</p>
 </div>
 
