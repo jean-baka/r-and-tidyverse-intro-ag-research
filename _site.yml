@@ -20,6 +20,8 @@ navbar:
           href: ADD2024_day1_am.R
         - text: "Day 1 afternoon"
           href: ADD2024_day1_pm.R
+        - text: "Day 2 morning"
+          href: ADD2024_day2_am.R
     - text: "ADD workshop scripts"
       menu:
         - text: "Day 1 morning"

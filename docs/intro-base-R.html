@@ -274,6 +274,9 @@ $(document).ready(function () {
     <li>
       <a href="ADD2024_day1_pm.R">Day 1 afternoon</a>
     </li>
+    <li>
+      <a href="ADD2024_day2_am.R">Day 2 morning</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -519,7 +522,7 @@ variables you defined earlier in your interactive session).</p>
     }
     else all.names
 }
-&lt;bytecode: 0x562e05b7cc90&gt;
+&lt;bytecode: 0x558989bd9c90&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 </div>
 <div id="getting-some-help" class="section level2">
@@ -1192,7 +1195,7 @@ frame:</p>
 &gt; cbind(my_column, iris) -&gt; iris2
 &gt; str(iris2)</code></pre>
 <pre><code>&#39;data.frame&#39;:   150 obs. of  6 variables:
- $ my_column   : num  66227 63615 47931 62574 53535 ...
+ $ my_column   : num  50318 78544 81284 95193 55201 ...
  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
@@ -1213,18 +1216,18 @@ dataframe made of numeric values:</p>
 &gt; av6=names(which.max(table(iris2[,6]))) # # to get the most common category in this factor
 &gt; rbind(iris2,c(av1,av2,av3,av4,av5,av6)) -&gt; iris3
 &gt; tail(iris3, n=2)</code></pre>
-<pre><code>          ID     Sepal.Length      Sepal.Width Petal.Length      Petal.Width
-150    48738              5.9                3          5.1              1.8
-151 49321.66 5.84333333333333 3.05733333333333        3.758 1.19933333333333
-      Species
-150 virginica
-151    setosa</code></pre>
+<pre><code>                  ID     Sepal.Length      Sepal.Width Petal.Length
+150            55317              5.9                3          5.1
+151 51499.4333333333 5.84333333333333 3.05733333333333        3.758
+         Petal.Width   Species
+150              1.8 virginica
+151 1.19933333333333    setosa</code></pre>
 <p>So it seems that we are fine: the line containing the average values
 of all the columns has been added at the bottom of the dataframe. But
 let’s look at the structure of our new <code>iris3</code> variable:</p>
 <pre class="r"><code>&gt; str(iris3)</code></pre>
 <pre><code>&#39;data.frame&#39;:   151 obs. of  6 variables:
- $ ID          : chr  &quot;66227&quot; &quot;63615&quot; &quot;47931&quot; &quot;62574&quot; ...
+ $ ID          : chr  &quot;50318&quot; &quot;78544&quot; &quot;81284&quot; &quot;95193&quot; ...
  $ Sepal.Length: chr  &quot;5.1&quot; &quot;4.9&quot; &quot;4.7&quot; &quot;4.6&quot; ...
  $ Sepal.Width : chr  &quot;3.5&quot; &quot;3&quot; &quot;3.2&quot; &quot;3.1&quot; ...
  $ Petal.Length: chr  &quot;1.4&quot; &quot;1.4&quot; &quot;1.3&quot; &quot;1.5&quot; ...
@@ -1246,10 +1249,10 @@ lots of basic objects accept conversion to strings by means of the
 <pre class="r"><code>&gt; mode(av6)</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>
 <pre class="r"><code>&gt; av1</code></pre>
-<pre><code>[1] 49321.66</code></pre>
+<pre><code>[1] 51499.43</code></pre>
 <pre class="r"><code>&gt; c(av1,av2,av3,av4,av5,av6) -&gt; last_row
 &gt; last_row</code></pre>
-<pre><code>[1] &quot;49321.66&quot;         &quot;5.84333333333333&quot; &quot;3.05733333333333&quot; &quot;3.758&quot;           
+<pre><code>[1] &quot;51499.4333333333&quot; &quot;5.84333333333333&quot; &quot;3.05733333333333&quot; &quot;3.758&quot;           
 [5] &quot;1.19933333333333&quot; &quot;setosa&quot;          </code></pre>
 <pre class="r"><code>&gt; mode(last_row)</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>
