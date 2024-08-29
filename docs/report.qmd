@@ -1,8 +1,9 @@
 ---
 title: "A short report on the livestock_data dataset"
 author: "Jean-Baka Domelevo Entfellner"
-format: html
-pdf-engine: pdflatex
+format: odt # or docx, pdf, odt, etc...
+pdf-engine: pdflatex # or xelatex on Windows
+papersize: a4
 ---
 
 ## Introduction
@@ -73,10 +74,9 @@ lm1 <- lm(stocking_rate ~ TLUsold_ha + stocking_rate + cow_inmilk, data = dat)
 summary(lm1)
 ```
 
-### Showcasing Latex
+### Showcasing Latex 
 
 Let's write the definition of the variance:
 
-```{=tex}
 $var = \frac{\sum_{i = 1}^n (x_i - \bar{x})^2}{n-1}$
-```
+
