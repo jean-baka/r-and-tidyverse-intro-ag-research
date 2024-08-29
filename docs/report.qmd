@@ -1,0 +1,82 @@
+---
+title: "A short report on the livestock_data dataset"
+author: "Jean-Baka Domelevo Entfellner"
+format: html
+pdf-engine: pdflatex
+---
+
+## Introduction
+
+This is a brief report on the initial analysis of the `livestock_data` dataset, created during the R training workshop delivered in [Addis Ababa](https://en.wikipedia.org/wiki/Addis_Ababa) on 27 -- 29 August 2024.
+
+## Loading the dataset
+
+We load the dataset using the `readxl` package. After silently loading the `tidyverse` package, we load the first sheet of the Excel file:
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+```{r}
+library(readxl)
+dat <- read_xlsx("livestock_data.xlsx", sheet = 1)
+glimpse(dat) # glimpse() from tibble is a bit like str()
+```
+
+In this dataset, we have `r nrow(dat)` observations and `r ncol(dat)` variables.
+
+The statistical summary of the dataset is below.
+
+```{r}
+#| echo: false
+summary(dat)
+```
+
+## A simple scatterplot
+
+We want to represent the potential association between the stocking rate and the number of **tropical livestock units (TLU)** sold per hectare. In order to do this, we plot in @fig-scatterplot a scatterplot using `ggplot2`.
+
+```{r}
+#| label: fig-scatterplot
+#| caption: "My first scatterplot with ggplot2"
+#| warning: false
+dat |> ggplot(aes(x=stocking_rate, y=TLUsold_ha)) + geom_point()
+```
+
+## And now, a linear model
+
+We test the linear model having the TLU sold by hectare as the response (aka. *dependent variable*) and the stocking rate, high_pred_cattle and the cow_inmilk variable.
+
+### Recoding NAs
+
+But before do that, we replace all NAs in cow_inmilk with 0 values (because this is what should have appeared in the dataset).
+
+```{r}
+# we first replace some NAs with 0s
+dat |> mutate(cow_inmilk = ifelse(is.na(cow_inmilk), 0, cow_inmilk)) -> dat
+
+# alternatively, a slightly shorter version of the same:
+dat |> mutate(cow_inmilk = replace_na(cow_inmilk, 0)) -> dat
+
+# OR, same:
+dat |> replace_na(list(cow_inmilk = 0)) -> dat
+```
+
+### And then the linear model
+
+```{r}
+# we then build the model:
+lm1 <- lm(stocking_rate ~ TLUsold_ha + stocking_rate + cow_inmilk, data = dat)
+
+# and we print its results with summary():
+summary(lm1)
+```
+
+### Showcasing Latex
+
+Let's write the definition of the variance:
+
+```{=tex}
+$var = \frac{\sum_{i = 1}^n (x_i - \bar{x})^2}{n-1}$
+```
