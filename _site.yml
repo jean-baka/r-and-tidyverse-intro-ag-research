@@ -26,6 +26,10 @@ navbar:
           href: ADD2024_day2_am.R
         - text: "Day 2 afternoon"
           href: ADD2024_day2_pm.R
+        - text: "Day 3 morning"
+          href: ADD2024_day3_am.R
+        - text: "Quarto report"
+          href: report.qmd
     - text: "ADD workshop scripts"
       menu:
         - text: "Day 1 morning"
